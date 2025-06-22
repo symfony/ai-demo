@@ -1,0 +1,22 @@
+services:
+  app:
+    image: dunglas/frankenphp
+    volumes:
+      - ./:/app
+    ports:
+      - 443:443
+    tty: true
+
+  composer:
+    image: composer:latest
+    volumes:
+      - ./:/app
+
+  chromadb:
+    image: chromadb/chroma:0.5.23
+    volumes:
+      - ./chromadb:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - PERSIST_DIRECTORY=/chroma/chroma # this is the default path, change it as needed
+      - ANONYMIZED_TELEMETRY=FALSE

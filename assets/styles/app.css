@@ -1,0 +1,65 @@
+body {
+    min-height: 100vh;
+
+    footer, footer a {
+        color: #6c757d;
+    }
+}
+
+.index {
+    .card-img-top {
+        text-align: center;
+    }
+}
+
+.chat {
+    .card {
+        border: 1px solid #bcbcbc;
+        background-color: rgba(250, 250, 250, 0.9);
+    }
+
+    .card-header {
+        background: #efefef;
+
+        svg {
+            margin-top: -2px;
+        }
+    }
+
+    .card-body {
+        height: 700px;
+
+        .user-message {
+            border-radius: 10px 10px 0 10px;
+            color: #292929;
+        }
+
+        .bot-message {
+            border-radius: 10px 10px 10px 0;
+            color: #292929;
+
+            &.loading {
+                color: rgba(41, 41, 41, 0.5);
+            }
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border: 2px solid white;
+        }
+    }
+
+    .card-footer {
+        background: #efefef;
+
+        input:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+}

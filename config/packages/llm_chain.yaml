@@ -1,0 +1,65 @@
+llm_chain:
+    platform:
+        openai:
+            api_key: '%env(OPENAI_API_KEY)%'
+    chain:
+        blog:
+            # platform: 'llm_chain.platform.anthropic'
+            model:
+                name: 'GPT'
+                version: 'gpt-4o-mini'
+            tools:
+                - 'PhpLlm\LlmChain\Chain\Toolbox\Tool\SimilaritySearch'
+                - service: 'clock'
+                  name: 'clock'
+                  description: 'Provides the current date and time.'
+                  method: 'now'
+        youtube:
+            model:
+                name: 'GPT'
+                version: 'gpt-4o-mini'
+            tools: false
+        wikipedia:
+            model:
+                name: 'GPT'
+                version: 'gpt-4o-mini'
+                options:
+                    temperature: 0.5
+            system_prompt: 'Please answer the users question based on Wikipedia and provide a link to the article.'
+            include_tools: true
+            tools:
+                - 'PhpLlm\LlmChain\Chain\Toolbox\Tool\Wikipedia'
+        audio:
+            model:
+                name: 'GPT'
+                version: 'gpt-4o-mini'
+            system_prompt: 'You are a friendly chatbot that likes to have a conversation with users and asks them some questions.'
+            tools:
+                # Chain in chain 🤯
+                - service: 'llm_chain.chain.blog'
+                  name: 'symfony_blog'
+                  description: 'Can answer questions based on the Symfony blog.'
+                  is_chain: true
+    store:
+        chroma_db:
+            symfonycon:
+                collection: 'symfony_blog'
+    embedder:
+        default:
+            model:
+                name: 'Embeddings'
+                version: 'text-embedding-ada-002'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # PhpLlm\LlmChain\Chain\Toolbox\Tool\Clock: ~
+    # PhpLlm\LlmChain\Chain\Toolbox\Tool\OpenMeteo: ~
+    # PhpLlm\LlmChain\Chain\Toolbox\Tool\SerpApi:
+    #     $apiKey: '%env(SERP_API_KEY)%'
+    PhpLlm\LlmChain\Chain\Toolbox\Tool\Wikipedia: ~
+    PhpLlm\LlmChain\Chain\Toolbox\Tool\SimilaritySearch:
+        $model: '@llm_chain.embedder.default.model'
+
