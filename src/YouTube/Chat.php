@@ -1,13 +1,20 @@
 <?php
 
-declare(strict_types=1);
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace App\YouTube;
 
-use PhpLlm\LlmChain\Chain\ChainInterface;
-use PhpLlm\LlmChain\Platform\Message\Message;
-use PhpLlm\LlmChain\Platform\Message\MessageBag;
-use PhpLlm\LlmChain\Platform\Response\TextResponse;
+use Symfony\AI\Agent\AgentInterface;
+use Symfony\AI\Platform\Message\Message;
+use Symfony\AI\Platform\Message\MessageBag;
+use Symfony\AI\Platform\Response\TextResponse;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -17,8 +24,8 @@ final class Chat
 
     public function __construct(
         private readonly RequestStack $requestStack,
-        #[Autowire(service: 'llm_chain.chain.youtube')]
-        private readonly ChainInterface $chain,
+        #[Autowire(service: 'symfony_ai.agent.youtube')]
+        private readonly AgentInterface $agent,
         private readonly TranscriptFetcher $transcriptFetcher,
     ) {
     }
@@ -34,7 +41,7 @@ final class Chat
         $system = <<<PROMPT
             You are an helpful assistant that answers questions about a YouTube video based on a transcript.
             If you can't answer a question, say so.
-            
+
             Video ID: {$videoId}
             Transcript:
             {$transcript}
@@ -54,9 +61,9 @@ final class Chat
         $messages = $this->loadMessages();
 
         $messages->add(Message::ofUser($message));
-        $response = $this->chain->call($messages);
+        $response = $this->agent->call($messages);
 
-        assert($response instanceof TextResponse);
+        \assert($response instanceof TextResponse);
 
         $messages->add(Message::ofAssistant($response->getContent()));
 

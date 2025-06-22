@@ -8,7 +8,7 @@
     </div>
     <div id="chat-body" class="card-body p-4 overflow-auto">
         {% for message in this.messages %}
-            {% include '../_message.html.twig' with { message, latest: loop.last } %}
+            {% include '_message.html.twig' with { message, latest: loop.last } %}
         {% else %}
             <div id="welcome" class="text-center mt-5 py-5 bg-white rounded-5 shadow-sm w-75 mx-auto">
                 {{ ux_icon('iconoir:microphone-solid', { height: '200px', width: '200px' }) }}

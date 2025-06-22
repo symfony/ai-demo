@@ -1,16 +1,18 @@
 {
-    "name": "php-llm/symfony-demo",
+    "name": "symfony-ai/demo",
     "type": "project",
-    "description": "Symfony Demo Chat Application",
+    "description": "Symfony AI Demo Application",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "codewithkyrian/chromadb-php": "^0.4.0",
         "league/commonmark": "^2.7",
-        "php-llm/llm-chain-bundle": "^0.22",
         "runtime/frankenphp-symfony": "^0.2.0",
+        "symfony/ai-bundle": "@dev",
         "symfony/asset": "7.3.*",
         "symfony/asset-mapper": "7.3.*",
         "symfony/clock": "7.3.*",
@@ -101,13 +103,19 @@
         },
         "pipeline": [
             "composer validate --strict",
-          "php -l src/**/*.php tests/**/*.php",
-          "bin/console lint:twig templates",
-          "bin/console lint:yaml config",
-          "bin/console lint:container",
+            "php -l src/**/*.php tests/**/*.php",
+            "bin/console lint:twig templates",
+            "bin/console lint:yaml config",
+            "bin/console lint:container",
             "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix",
             "phpstan analyse",
             "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html=coverage"
         ]
-    }
+    },
+    "repositories": [
+        { "type": "path", "url": "../src/agent" },
+        { "type": "path", "url": "../src/ai-bundle" },
+        { "type": "path", "url": "../src/platform" },
+        { "type": "path", "url": "../src/store" }
+    ]
 }

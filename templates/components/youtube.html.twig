@@ -9,7 +9,7 @@
     <div id="chat-body" class="card-body p-4 overflow-auto">
         {% set messages = this.messages %}
         {% for message in messages %}
-            {% include '../_message.html.twig' with { message, latest: loop.last } %}
+            {% include '_message.html.twig' with { message, latest: loop.last } %}
         {% else %}
             <div id="welcome" class="text-center mt-5 py-5 bg-white rounded-5 shadow-sm w-75 mx-auto">
                 {{ ux_icon('bi:youtube', { color: '#FF0000', height: '200px', width: '200px' }) }}

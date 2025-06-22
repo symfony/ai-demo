@@ -1,16 +1,23 @@
 <?php
 
-declare(strict_types=1);
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace App\Video;
 
-use PhpLlm\LlmChain\Platform\Bridge\OpenAI\GPT;
-use PhpLlm\LlmChain\Platform\Message\Content\Image;
-use PhpLlm\LlmChain\Platform\Message\Message;
-use PhpLlm\LlmChain\Platform\Message\MessageBag;
-use PhpLlm\LlmChain\Platform\PlatformInterface;
-use PhpLlm\LlmChain\Platform\Response\AsyncResponse;
-use PhpLlm\LlmChain\Platform\Response\TextResponse;
+use Symfony\AI\Platform\Bridge\OpenAI\GPT;
+use Symfony\AI\Platform\Message\Content\Image;
+use Symfony\AI\Platform\Message\Message;
+use Symfony\AI\Platform\Message\MessageBag;
+use Symfony\AI\Platform\PlatformInterface;
+use Symfony\AI\Platform\Response\AsyncResponse;
+use Symfony\AI\Platform\Response\TextResponse;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
@@ -46,9 +53,9 @@ final class TwigComponent
             'max_tokens' => 100,
         ]);
 
-        assert($response instanceof AsyncResponse);
+        \assert($response instanceof AsyncResponse);
         $response = $response->unwrap();
-        assert($response instanceof TextResponse);
+        \assert($response instanceof TextResponse);
 
         $this->caption = $response->getContent();
     }

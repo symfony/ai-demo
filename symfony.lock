@@ -49,6 +49,9 @@
             "tests/bootstrap.php"
         ]
     },
+    "symfony/ai-bundle": {
+        "version": "dev-integrate-demo"
+    },
     "symfony/asset-mapper": {
         "version": "7.1",
         "recipe": {

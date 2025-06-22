@@ -4,12 +4,12 @@
 
 {% block content %}
     <div class="container">
-        <h1 class="text-dark-emphasis">Welcome to the <strong class="text-dark">LLM Chain</strong> Demo</h1>
+        <h1 class="text-dark-emphasis">Welcome to the <strong class="text-dark">Symfony AI</strong> Demo</h1>
         <p class="my-4 text-dark">
-            This is a small demo app that can be used to explore the capabilities of LLM Chain together with Symfony,
+            This is a small demo app that can be used to explore the capabilities of Symfony AI Components together with
             Symfony UX and Twig Live Components.<br />
-            Central to this demo are three chatbot examples that are implemented in <code>src/**/Chat.php</code> and LLM Chain
-            configuration can be found in <code>config/packages/llm_chain.yaml</code>.
+            Central to this demo are five chatbot examples that are implemented in <code>src/**/Chat.php</code> and AI
+            configuration can be found in <code>config/packages/ai.yaml</code>.
         </p>
         <h3 class="text-dark">Examples</h3>
         <div class="row">
@@ -27,7 +27,7 @@
                     {% if 'dev' == app.environment %}
                         <div class="card-footer">
                             {{ ux_icon('solar:code-linear', { height: '20px', width: '20px' }) }}
-                            <a href="{{ path('_profiler_open_file', { file: 'src/Blog/Chat.php', line: 14 }) }}">See Implementation</a>
+                            <a href="{{ path('_profiler_open_file', { file: 'src/Blog/Chat.php', line: 21 }) }}">See Implementation</a>
                         </div>
                     {% endif %}
                 </div>
@@ -46,7 +46,7 @@
                     {% if 'dev' == app.environment %}
                         <div class="card-footer">
                             {{ ux_icon('solar:code-linear', { height: '20px', width: '20px' }) }}
-                            <a href="{{ path('_profiler_open_file', { file: 'src/YouTube/Chat.php', line: 15 }) }}">See Implementation</a>
+                            <a href="{{ path('_profiler_open_file', { file: 'src/YouTube/Chat.php', line: 21 }) }}">See Implementation</a>
                         </div>
                     {% endif %}
                 </div>
@@ -65,7 +65,7 @@
                     {% if 'dev' == app.environment %}
                         <div class="card-footer">
                             {{ ux_icon('solar:code-linear', { height: '20px', width: '20px' }) }}
-                            <a href="{{ path('_profiler_open_file', { file: 'src/Wikipedia/Chat.php', line: 14 }) }}">See Implementation</a>
+                            <a href="{{ path('_profiler_open_file', { file: 'src/Wikipedia/Chat.php', line: 21 }) }}">See Implementation</a>
                         </div>
                     {% endif %}
                 </div>
@@ -87,7 +87,7 @@
                     {% if 'dev' == app.environment %}
                         <div class="card-footer">
                             {{ ux_icon('solar:code-linear', { height: '20px', width: '20px' }) }}
-                            <a href="{{ path('_profiler_open_file', { file: 'src/Audio/Chat.php', line: 18 }) }}">See Implementation</a>
+                            <a href="{{ path('_profiler_open_file', { file: 'src/Audio/Chat.php', line: 25 }) }}">See Implementation</a>
                         </div>
                     {% endif %}
                 </div>
@@ -106,7 +106,7 @@
                     {% if 'dev' == app.environment %}
                         <div class="card-footer">
                             {{ ux_icon('solar:code-linear', { height: '20px', width: '20px' }) }}
-                            <a href="{{ path('_profiler_open_file', { file: 'src/Video/TwigComponent.php', line: 37 }) }}">See Implementation</a>
+                            <a href="{{ path('_profiler_open_file', { file: 'src/Video/TwigComponent.php', line: 41 }) }}">See Implementation</a>
                         </div>
                     {% endif %}
                 </div>

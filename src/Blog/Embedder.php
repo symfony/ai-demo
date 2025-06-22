@@ -1,18 +1,25 @@
 <?php
 
-declare(strict_types=1);
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace App\Blog;
 
-use PhpLlm\LlmChain\Store\Document\Metadata;
-use PhpLlm\LlmChain\Store\Document\TextDocument;
-use PhpLlm\LlmChain\Store\Embedder as LlmChainEmbedder;
+use Symfony\AI\Store\Document\Metadata;
+use Symfony\AI\Store\Document\TextDocument;
+use Symfony\AI\Store\Indexer;
 
 final readonly class Embedder
 {
     public function __construct(
         private FeedLoader $loader,
-        private LlmChainEmbedder $embedder,
+        private Indexer $indexer,
     ) {
     }
 
@@ -23,6 +30,6 @@ final readonly class Embedder
             $documents[] = new TextDocument($post->id, $post->toString(), new Metadata($post->toArray()));
         }
 
-        $this->embedder->embed($documents);
+        $this->indexer->index($documents);
     }
 }

@@ -1,6 +1,6 @@
-# LLM Chain - Symfony Demo Chatbot Application
+# Symfony AI - Demo Application
 
-Simple Symfony demo application on top of [LLM Chain](https://github.com/php-llm/llm-chain) and its [integration bundle](https://github.com/php-llm/llm-chain-bundle).
+Symfony application demoing Symfony AI components.
 
 ## Examples
 
@@ -22,7 +22,7 @@ What you need to run this demo:
 This small demo sits on top of following technologies:
 
 * [PHP >= 8.4](https://www.php.net/releases/8.4/en.php)
-* [Symfony 7.2 incl. Twig, Asset Mapper & UX](https://symfony.com/)
+* [Symfony 7.3 incl. Twig, Asset Mapper & UX](https://symfony.com/)
 * [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 * [OpenAI's GPT & Embeddings](https://platform.openai.com/docs/overview)
 * [ChromaDB Vector Store](https://www.trychroma.com/)
@@ -37,8 +37,8 @@ The setup is split into three parts, the Symfony application, the OpenAI configu
 Checkout the repository, start the docker environment and install dependencies:
 
 ```shell
-git clone git@github.com:php-llm/llm-chain-symfony-demo.git
-cd llm-chain-symfony-demo
+git clone git@github.com:symfony/ai-demo.git
+cd ai-demo
 docker compose up -d
 docker compose run composer install
 ```
@@ -46,7 +46,7 @@ docker compose run composer install
 Now you should be able to open https://localhost/ in your browser,
 and the chatbot UI should be available for you to start chatting.
 
-> [!NOTE]  
+> [!NOTE]
 > You might have to bypass the security warning of your browser with regard to self-signed certificates.
 
 ### 2. OpenAI Configuration
@@ -86,7 +86,7 @@ docker compose exec app bin/console app:blog:query
 
 ## Functionality
 
-* The chatbot application is a simple and small Symfony 7.2 application.
+* The chatbot application is a simple and small Symfony 7.3 application.
 * The UI is coupled to a [Twig LiveComponent](https://symfony.com/bundles/ux-live-component/current/index.html), that integrates different `Chat` implementations on top of the user's session.
 * You can reset the chat context by hitting the `Reset` button in the top right corner.
 * You find three different usage scenarios in the upper navbar.

@@ -1,6 +1,13 @@
 <?php
 
-declare(strict_types=1);
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace App\YouTube;
 
@@ -29,7 +36,7 @@ final class TranscriptFetcher
         })->text();
 
         // Extract and parse the JSON data from the script
-        $start = strpos($scriptContent, 'var ytInitialPlayerResponse = ') + strlen('var ytInitialPlayerResponse = ');
+        $start = strpos($scriptContent, 'var ytInitialPlayerResponse = ') + \strlen('var ytInitialPlayerResponse = ');
         $dataString = substr($scriptContent, $start);
         $dataString = substr($dataString, 0, strrpos($dataString, ';') ?: null);
         $data = json_decode(trim($dataString), true);
@@ -47,10 +54,10 @@ final class TranscriptFetcher
 
         // Collect all text elements from the captions
         $transcript = $xmlCrawler->filter('text')->each(function (Crawler $node) {
-            return $node->text() . ' TranscriptFetcher.php';
+            return $node->text().' TranscriptFetcher.php';
         });
 
         // Combine all the text elements into one string
-        return implode(PHP_EOL, $transcript);
+        return implode(\PHP_EOL, $transcript);
     }
 }

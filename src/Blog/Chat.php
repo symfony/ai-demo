@@ -1,13 +1,20 @@
 <?php
 
-declare(strict_types=1);
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace App\Blog;
 
-use PhpLlm\LlmChain\Chain\ChainInterface;
-use PhpLlm\LlmChain\Platform\Message\Message;
-use PhpLlm\LlmChain\Platform\Message\MessageBag;
-use PhpLlm\LlmChain\Platform\Response\TextResponse;
+use Symfony\AI\Agent\AgentInterface;
+use Symfony\AI\Platform\Message\Message;
+use Symfony\AI\Platform\Message\MessageBag;
+use Symfony\AI\Platform\Response\TextResponse;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -17,8 +24,8 @@ final class Chat
 
     public function __construct(
         private readonly RequestStack $requestStack,
-        #[Autowire(service: 'llm_chain.chain.blog')]
-        private readonly ChainInterface $chain,
+        #[Autowire(service: 'symfony_ai.agent.blog')]
+        private readonly AgentInterface $agent,
     ) {
     }
 
@@ -28,7 +35,7 @@ final class Chat
             Message::forSystem(<<<PROMPT
                 You are an helpful assistant that knows about the latest blog content of the Symfony's framework website.
                 To search for content you use the tool 'similarity_search' for generating the answer. Only use content
-                that you get from searching with that tool or you previous answers. Don't make up information and if you
+                that you get from searching with that tool or your previous answers. Don't make up information and if you
                 can't find something, just say so. Also provide links to the blog posts you use as sources.
                 PROMPT
             )
@@ -42,9 +49,9 @@ final class Chat
         $messages = $this->loadMessages();
 
         $messages->add(Message::ofUser($message));
-        $response = $this->chain->call($messages);
+        $response = $this->agent->call($messages);
 
-        assert($response instanceof TextResponse);
+        \assert($response instanceof TextResponse);
 
         $messages->add(Message::ofAssistant($response->getContent()));
 

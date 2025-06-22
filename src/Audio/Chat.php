@@ -1,17 +1,24 @@
 <?php
 
-declare(strict_types=1);
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace App\Audio;
 
-use PhpLlm\LlmChain\Chain\ChainInterface;
-use PhpLlm\LlmChain\Platform\Bridge\OpenAI\Whisper;
-use PhpLlm\LlmChain\Platform\Message\Content\Audio;
-use PhpLlm\LlmChain\Platform\Message\Message;
-use PhpLlm\LlmChain\Platform\Message\MessageBag;
-use PhpLlm\LlmChain\Platform\PlatformInterface;
-use PhpLlm\LlmChain\Platform\Response\AsyncResponse;
-use PhpLlm\LlmChain\Platform\Response\TextResponse;
+use Symfony\AI\Agent\AgentInterface;
+use Symfony\AI\Platform\Bridge\OpenAI\Whisper;
+use Symfony\AI\Platform\Message\Content\Audio;
+use Symfony\AI\Platform\Message\Message;
+use Symfony\AI\Platform\Message\MessageBag;
+use Symfony\AI\Platform\PlatformInterface;
+use Symfony\AI\Platform\Response\AsyncResponse;
+use Symfony\AI\Platform\Response\TextResponse;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -22,8 +29,8 @@ final class Chat
     public function __construct(
         private readonly PlatformInterface $platform,
         private readonly RequestStack $requestStack,
-        #[Autowire(service: 'llm_chain.chain.audio')]
-        private readonly ChainInterface $chain,
+        #[Autowire(service: 'symfony_ai.agent.audio')]
+        private readonly AgentInterface $agent,
     ) {
     }
 
@@ -34,9 +41,9 @@ final class Chat
         file_put_contents($path, base64_decode($base64audio));
 
         $response = $this->platform->request(new Whisper(), Audio::fromFile($path));
-        assert($response instanceof AsyncResponse);
+        \assert($response instanceof AsyncResponse);
         $response = $response->unwrap();
-        assert($response instanceof TextResponse);
+        \assert($response instanceof TextResponse);
 
         $this->submitMessage($response->getContent());
     }
@@ -51,9 +58,9 @@ final class Chat
         $messages = $this->loadMessages();
 
         $messages->add(Message::ofUser($message));
-        $response = $this->chain->call($messages);
+        $response = $this->agent->call($messages);
 
-        assert($response instanceof TextResponse);
+        \assert($response instanceof TextResponse);
 
         $messages->add(Message::ofAssistant($response->getContent()));
 

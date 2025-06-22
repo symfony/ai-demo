@@ -6,7 +6,3 @@ parameters:
         - public/
         - src/
         - tests/
-    reportUnmatchedIgnoredErrors: false
-    typeAliases:
-        MessageArray: 'array{role: string, content: string}'
-        MessageList: 'list<MessageArray>'

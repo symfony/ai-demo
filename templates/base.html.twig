@@ -2,7 +2,7 @@
 <html lang="{{ app.request.locale }}">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}LLM Chain Demo{% endblock %}</title>
+        <title>{% block title %}Symfony AI Demo{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/ico" href="{{ asset('favicon.ico') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -18,7 +18,7 @@
             <div class="container">
                 <a class="navbar-brand ms-2 p-0" href="{{ path('index') }}">
                     {{ ux_icon('fluent:bot-24-filled', { height: '40px', width: '40px' }) }}
-                    <strong>LLM Chain</strong> Demo
+                    <strong>Symfony AI</strong> Demo
                 </a>
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav ms-auto me-2 mb-0">
@@ -39,7 +39,7 @@
                         </li>
                         <li class="nav-item"><span class="nav-link">|</span></li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://github.com/php-llm/symfony-demo" target="_blank">{{ ux_icon('mdi:github', { height: '20px', width: '20px' }) }} GitHub</a>
+                            <a class="nav-link" href="https://github.com/symfony/ai" target="_blank">{{ ux_icon('mdi:github', { height: '20px', width: '20px' }) }} GitHub</a>
                         </li>
                     </ul>
                 </div>
@@ -48,9 +48,9 @@
         <div class="container pt-5">
             {% block content %}{% endblock %}
             <footer class="py-4 text-center">
-                Symfony demo application for <a href="https://github.com/php-llm/llm-chain" target="_blank">LLM Chain</a>
+                Demo application for <a href="https://github.com/symfony/ai" target="_blank">Symfony AI</a>
                 &bullet;
-                Feel free to propose more examples on <a href="https://github.com/php-llm/symfony-demo" target="_blank">GitHub</a>
+                Feel free to propose more examples on <a href="https://github.com/symfony/ai" target="_blank">GitHub</a>
             </footer>
         </div>
     </body>

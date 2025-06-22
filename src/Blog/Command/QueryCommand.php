@@ -1,14 +1,21 @@
 <?php
 
-declare(strict_types=1);
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 namespace App\Blog\Command;
 
 use Codewithkyrian\ChromaDB\Client;
-use PhpLlm\LlmChain\Platform\Bridge\OpenAI\Embeddings;
-use PhpLlm\LlmChain\Platform\PlatformInterface;
-use PhpLlm\LlmChain\Platform\Response\AsyncResponse;
-use PhpLlm\LlmChain\Platform\Response\VectorResponse;
+use Symfony\AI\Platform\Bridge\OpenAI\Embeddings;
+use Symfony\AI\Platform\PlatformInterface;
+use Symfony\AI\Platform\Response\AsyncResponse;
+use Symfony\AI\Platform\Response\VectorResponse;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -40,19 +47,19 @@ final class QueryCommand extends Command
         ]);
 
         $search = $io->ask('What do you want to know about?', 'New Symfony Features');
-        $io->comment(sprintf('Converting "%s" to vector & searching in Chroma DB ...', $search));
+        $io->comment(\sprintf('Converting "%s" to vector & searching in Chroma DB ...', $search));
         $io->comment('Results are limited to 4 most similar documents.');
 
         $platformResponse = $this->platform->request(new Embeddings(), $search);
-        assert($platformResponse instanceof AsyncResponse);
+        \assert($platformResponse instanceof AsyncResponse);
         $platformResponse = $platformResponse->unwrap();
-        assert($platformResponse instanceof VectorResponse);
+        \assert($platformResponse instanceof VectorResponse);
         $queryResponse = $collection->query(
             queryEmbeddings: [$platformResponse->getContent()[0]->getData()],
             nResults: 4,
         );
 
-        if (1 === count($queryResponse->ids, COUNT_RECURSIVE)) {
+        if (1 === \count($queryResponse->ids, \COUNT_RECURSIVE)) {
             $io->error('No results found!');
 
             return Command::FAILURE;
