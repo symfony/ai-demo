@@ -25,7 +25,7 @@ final class Chat
     public function __construct(
         private readonly RequestStack $requestStack,
         #[Autowire(service: 'symfony_ai.agent.wikipedia')]
-        private readonly AgentInterface $chain,
+        private readonly AgentInterface $agent,
     ) {
     }
 
@@ -39,7 +39,7 @@ final class Chat
         $messages = $this->loadMessages();
 
         $messages->add(Message::ofUser($message));
-        $response = $this->chain->call($messages);
+        $response = $this->agent->call($messages);
 
         \assert($response instanceof TextResponse);
 
