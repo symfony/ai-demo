@@ -11,6 +11,8 @@
         "ext-iconv": "*",
         "codewithkyrian/chromadb-php": "^0.4.0",
         "league/commonmark": "^2.7",
+        "mrmysql/youtube-transcript": "^0.0.5",
+        "php-http/discovery": "^1.20",
         "runtime/frankenphp-symfony": "^0.2.0",
         "symfony/ai-bundle": "@dev",
         "symfony/asset": "7.3.*",

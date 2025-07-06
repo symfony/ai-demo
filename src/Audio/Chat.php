@@ -17,7 +17,6 @@ use Symfony\AI\Platform\Message\Content\Audio;
 use Symfony\AI\Platform\Message\Message;
 use Symfony\AI\Platform\Message\MessageBag;
 use Symfony\AI\Platform\PlatformInterface;
-use Symfony\AI\Platform\Response\AsyncResponse;
 use Symfony\AI\Platform\Response\TextResponse;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -41,11 +40,8 @@ final class Chat
         file_put_contents($path, base64_decode($base64audio));
 
         $response = $this->platform->request(new Whisper(), Audio::fromFile($path));
-        \assert($response instanceof AsyncResponse);
-        $response = $response->unwrap();
-        \assert($response instanceof TextResponse);
 
-        $this->submitMessage($response->getContent());
+        $this->submitMessage($response->asText());
     }
 
     public function loadMessages(): MessageBag
