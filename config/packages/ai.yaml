@@ -6,8 +6,8 @@ ai:
         blog:
             # platform: 'symfony_ai.platform.anthropic'
             model:
-                name: 'GPT'
-                version: 'gpt-4o-mini'
+                class: 'Symfony\AI\Platform\Bridge\OpenAI\GPT'
+                name: !php/const Symfony\AI\Platform\Bridge\OpenAI\GPT::GPT_4O_MINI
             tools:
                 - 'Symfony\AI\Agent\Toolbox\Tool\SimilaritySearch'
                 - service: 'clock'
@@ -16,13 +16,13 @@ ai:
                   method: 'now'
         youtube:
             model:
-                name: 'GPT'
-                version: 'gpt-4o-mini'
+                class: 'Symfony\AI\Platform\Bridge\OpenAI\GPT'
+                name: !php/const Symfony\AI\Platform\Bridge\OpenAI\GPT::GPT_4O_MINI
             tools: false
         wikipedia:
             model:
-                name: 'GPT'
-                version: 'gpt-4o-mini'
+                class: 'Symfony\AI\Platform\Bridge\OpenAI\GPT'
+                name: !php/const Symfony\AI\Platform\Bridge\OpenAI\GPT::GPT_4O_MINI
                 options:
                     temperature: 0.5
             system_prompt: 'Please answer the users question based on Wikipedia and provide a link to the article.'
@@ -31,8 +31,8 @@ ai:
                 - 'Symfony\AI\Agent\Toolbox\Tool\Wikipedia'
         audio:
             model:
-                name: 'GPT'
-                version: 'gpt-4o-mini'
+                class: 'Symfony\AI\Platform\Bridge\OpenAI\GPT'
+                name: !php/const Symfony\AI\Platform\Bridge\OpenAI\GPT::GPT_4O_MINI
             system_prompt: 'You are a friendly chatbot that likes to have a conversation with users and asks them some questions.'
             tools:
                 # Agent in agent 🤯
@@ -47,8 +47,8 @@ ai:
     indexer:
         default:
             model:
-                name: 'Embeddings'
-                version: 'text-embedding-ada-002'
+                class: 'Symfony\AI\Platform\Bridge\OpenAI\Embeddings'
+                name: !php/const Symfony\AI\Platform\Bridge\OpenAI\Embeddings::TEXT_ADA_002
 
 services:
     _defaults:
