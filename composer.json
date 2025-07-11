@@ -1,5 +1,5 @@
 {
-    "name": "symfony-ai/demo",
+    "name": "symfony/ai-demo",
     "type": "project",
     "description": "Symfony AI Demo Application",
     "license": "MIT",
