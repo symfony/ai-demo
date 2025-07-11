@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d376fdbaeea8a7a8e4e399c9d8a6d2a4",
+    "content-hash": "8c90f97b87d1b338e260127542f0ef1e",
     "packages": [
         {
             "name": "codewithkyrian/chromadb-php",
@@ -2012,7 +2012,7 @@
         },
         {
             "name": "symfony/ai-agent",
-            "version": "dev-demo-update",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../src/agent",
@@ -2094,7 +2094,7 @@
         },
         {
             "name": "symfony/ai-bundle",
-            "version": "dev-demo-update",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../src/ai-bundle",
@@ -2145,7 +2145,7 @@
         },
         {
             "name": "symfony/ai-platform",
-            "version": "dev-demo-update",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../src/platform",
@@ -2230,7 +2230,7 @@
         },
         {
             "name": "symfony/ai-store",
-            "version": "dev-demo-update",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../src/store",
