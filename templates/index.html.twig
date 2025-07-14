@@ -72,7 +72,6 @@
             </div>
         </div>
         <div class="row mt-4">
-            <div class="col-md-2"></div>
             <div class="col-md-4">
                 <div class="card audio bg-body shadow-sm">
                     <div class="card-img-top py-2">
@@ -111,7 +110,25 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <div class="card stream bg-body shadow-sm">
+                    <div class="card-img-top py-2">
+                        {{ ux_icon('mdi:car-turbocharger', { height: '150px', width: '150px' }) }}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Turbo Stream Bot</h5>
+                        <p class="card-text">Simple demonstration of text streaming capabilities based on Turbo and SSE.</p>
+                        <a href="{{ path('stream') }}" class="btn btn-outline-dark d-block">Try Turbo Stream Bot</a>
+                    </div>
+                    {# Profiler route only available in dev #}
+                    {% if 'dev' == app.environment %}
+                        <div class="card-footer">
+                            {{ ux_icon('solar:code-linear', { height: '20px', width: '20px' }) }}
+                            <a href="{{ path('_profiler_open_file', { file: 'src/Stream/TwigComponent.php', line: 41 }) }}">See Implementation</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

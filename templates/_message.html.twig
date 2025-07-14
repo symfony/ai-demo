@@ -4,8 +4,8 @@
     {{ _self.user(message.content) }}
 {% endif %}
 
-{% macro bot(content, loading = false, latest = false) %}
-    <div class="d-flex align-items-baseline mb-4">
+{% macro bot(content, loading = false, latest = false, contentId = null, messageId = null) %}
+    <div class="d-flex align-items-baseline mb-4"{% if messageId %} id="{{ messageId }}"{% endif %}>
         <div class="bot avatar rounded-3 shadow-sm">
             {{ ux_icon('fluent:bot-24-filled', { height: '45px', width: '45px' }) }}
         </div>
@@ -16,7 +16,7 @@
                     <i>{{ content }}</i>
                 </div>
             {% else %}
-                <div class="bot-message d-inline-block p-2 px-3 m-1 border border-light-subtle shadow-sm">
+                <div class="bot-message d-inline-block p-2 px-3 m-1 border border-light-subtle shadow-sm"{% if contentId %} id="{{ contentId }}"{% endif %}>
                     {% if latest and app.request.xmlHttpRequest %}
                         <span
                                 data-controller="symfony--ux-typed"

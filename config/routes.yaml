@@ -38,3 +38,14 @@ wikipedia:
     defaults:
         template:  'chat.html.twig'
         context: { chat: 'wikipedia' }
+
+stream:
+    path: '/stream'
+    controller: 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController'
+    defaults:
+        template:  'chat.html.twig'
+        context: { chat: 'stream' }
+
+stream_assistant_reply:
+    path: '/stream/assistant-reply'
+    controller: 'App\Stream\TwigComponent::streamContent'

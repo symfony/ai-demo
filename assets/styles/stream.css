@@ -1,0 +1,33 @@
+.stream {
+    body&, .card-img-top {
+        background: #ececec;
+        background: linear-gradient(0deg, #d26f15 0%, #ff9f4c 100%);
+    }
+
+    &.chat {
+        .user-message {
+            background: #ffffff;
+        }
+
+        .bot-message {
+            background: #ffffff;
+
+            a {
+                color: #3e2926;
+            }
+        }
+
+        .avatar {
+            &.bot, &.user {
+                outline: 1px solid #eaeaea;
+                background: #eaeaea;
+            }
+        }
+
+        footer {
+            &, & a {
+                color: var(--bs-light);
+            }
+        }
+    }
+}
