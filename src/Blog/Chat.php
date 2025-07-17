@@ -24,7 +24,7 @@ final class Chat
 
     public function __construct(
         private readonly RequestStack $requestStack,
-        #[Autowire(service: 'symfony_ai.agent.blog')]
+        #[Autowire(service: 'ai.agent.blog')]
         private readonly AgentInterface $agent,
     ) {
     }

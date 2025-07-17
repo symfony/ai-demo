@@ -4,7 +4,7 @@ ai:
             api_key: '%env(OPENAI_API_KEY)%'
     agent:
         blog:
-            # platform: 'symfony_ai.platform.anthropic'
+            # platform: 'ai.platform.anthropic'
             model:
                 class: 'Symfony\AI\Platform\Bridge\OpenAI\GPT'
                 name: !php/const Symfony\AI\Platform\Bridge\OpenAI\GPT::GPT_4O_MINI
@@ -36,7 +36,7 @@ ai:
             system_prompt: 'You are a friendly chatbot that likes to have a conversation with users and asks them some questions.'
             tools:
                 # Agent in agent 🤯
-                - service: 'symfony_ai.agent.blog'
+                - service: 'ai.agent.blog'
                   name: 'symfony_blog'
                   description: 'Can answer questions based on the Symfony blog.'
                   is_agent: true
@@ -61,5 +61,5 @@ services:
     #     $apiKey: '%env(SERP_API_KEY)%'
     Symfony\AI\Agent\Toolbox\Tool\Wikipedia: ~
     Symfony\AI\Agent\Toolbox\Tool\SimilaritySearch:
-        $model: '@symfony_ai.indexer.default.model'
+        $model: '@ai.indexer.default.model'
 

@@ -24,7 +24,7 @@ final class Chat
 
     public function __construct(
         private readonly RequestStack $requestStack,
-        #[Autowire(service: 'symfony_ai.agent.youtube')]
+        #[Autowire(service: 'ai.agent.youtube')]
         private readonly AgentInterface $agent,
         private readonly TranscriptFetcher $transcriptFetcher,
     ) {
