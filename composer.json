@@ -113,11 +113,5 @@
             "phpstan analyse",
             "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html=coverage"
         ]
-    },
-    "repositories": [
-        { "type": "path", "url": "../src/agent" },
-        { "type": "path", "url": "../src/ai-bundle" },
-        { "type": "path", "url": "../src/platform" },
-        { "type": "path", "url": "../src/store" }
-    ]
+    }
 }

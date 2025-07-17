@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c90f97b87d1b338e260127542f0ef1e",
+    "content-hash": "17d4e2fa71b65e0f756a23c562c57efe",
     "packages": [
         {
             "name": "codewithkyrian/chromadb-php",
@@ -1459,16 +1459,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68"
+                "reference": "b9e61a61e39e02dd90944e9115241c7f7e76bfd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
-                "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/b9e61a61e39e02dd90944e9115241c7f7e76bfd8",
+                "reference": "b9e61a61e39e02dd90944e9115241c7f7e76bfd8",
                 "shasum": ""
             },
             "require": {
@@ -1500,9 +1500,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.1.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.2.0"
             },
-            "time": "2025-02-19T13:28:12+00:00"
+            "time": "2025-07-13T07:04:09+00:00"
         },
         {
             "name": "psr/cache",
@@ -2013,10 +2013,16 @@
         {
             "name": "symfony/ai-agent",
             "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ai-agent.git",
+                "reference": "2e2a894a161070c419387b65674c70b33f54bcef"
+            },
             "dist": {
-                "type": "path",
-                "url": "../src/agent",
-                "reference": "fdf39db02aa955deb5ce0a1d983a5a373210d5e2"
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ai-agent/zipball/2e2a894a161070c419387b65674c70b33f54bcef",
+                "reference": "2e2a894a161070c419387b65674c70b33f54bcef",
+                "shasum": ""
             },
             "require": {
                 "ext-fileinfo": "*",
@@ -2043,19 +2049,12 @@
                 "symfony/event-dispatcher": "^6.4 || ^7.1",
                 "symfony/http-foundation": "^6.4 || ^7.1"
             },
-            "suggest": {
-                "mrmysql/youtube-transcript": "For using the YouTube transcription tool.",
-                "psr/cache": "For using the CacheStore as message store.",
-                "symfony/ai-store": "For using Similarity Search with a vector store.",
-                "symfony/css-selector": "For using the YouTube transcription tool.",
-                "symfony/dom-crawler": "For using the Crawler tool.",
-                "symfony/http-foundation": "For using the SessionStore as message store."
-            },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/ai",
-                    "url": "https://github.com/symfony/ai"
+                    "url": "https://github.com/symfony/ai",
+                    "name": "symfony/ai"
                 }
             },
             "autoload": {
@@ -2063,12 +2062,7 @@
                     "Symfony\\AI\\Agent\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Symfony\\AI\\Agent\\Tests\\": "tests/",
-                    "Symfony\\AI\\Fixtures\\": "../../fixtures"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2084,21 +2078,42 @@
             ],
             "description": "PHP library for building agentic applications.",
             "keywords": [
-                "agent",
+                "Agent",
                 "ai",
                 "llm"
             ],
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/symfony/ai-agent/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-07-17T08:55:01+00:00"
         },
         {
             "name": "symfony/ai-bundle",
             "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ai-bundle.git",
+                "reference": "2d4608b6498999703dabd590b207449b495a3e21"
+            },
             "dist": {
-                "type": "path",
-                "url": "../src/ai-bundle",
-                "reference": "b86468029dddc20ded4eda60e1250e3aed68034d"
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ai-bundle/zipball/2d4608b6498999703dabd590b207449b495a3e21",
+                "reference": "2d4608b6498999703dabd590b207449b495a3e21",
+                "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
@@ -2112,19 +2127,18 @@
             },
             "require-dev": {
                 "phpstan/phpstan": "^2.1",
-                "phpunit/phpunit": "^11.5"
+                "phpunit/phpunit": "^11.5",
+                "symfony/expression-language": "^6.4 || ^7.0",
+                "symfony/security-core": "^6.4 || ^7.0"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Symfony\\AI\\AIBundle\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Symfony\\AI\\AIBundle\\Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2139,17 +2153,38 @@
                 }
             ],
             "description": "Integration bundle for Symfony AI components",
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/symfony/ai-bundle/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-07-17T21:01:40+00:00"
         },
         {
             "name": "symfony/ai-platform",
             "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ai-platform.git",
+                "reference": "a551b071cf19705756d81a5cea2ef3ec8c86ee4a"
+            },
             "dist": {
-                "type": "path",
-                "url": "../src/platform",
-                "reference": "21cd90f88bc76accce0b5ffb118618333d2eca21"
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ai-platform/zipball/a551b071cf19705756d81a5cea2ef3ec8c86ee4a",
+                "reference": "a551b071cf19705756d81a5cea2ef3ec8c86ee4a",
+                "shasum": ""
             },
             "require": {
                 "ext-fileinfo": "*",
@@ -2164,15 +2199,13 @@
                 "symfony/property-info": "^6.4 || ^7.1",
                 "symfony/serializer": "^6.4 || ^7.1",
                 "symfony/type-info": "^7.2.3",
-                "symfony/uid": "^6.4 || ^7.1",
-                "webmozart/assert": "^1.11"
+                "symfony/uid": "^6.4 || ^7.1"
             },
             "require-dev": {
                 "async-aws/bedrock-runtime": "^0.1.0",
                 "codewithkyrian/transformers": "^0.5.3",
                 "phpstan/phpstan": "^2.1.17",
                 "phpstan/phpstan-symfony": "^2.0.6",
-                "phpstan/phpstan-webmozart-assert": "^2.0.0",
                 "phpunit/phpunit": "^11.5",
                 "symfony/ai-agent": "@dev",
                 "symfony/console": "^6.4 || ^7.1",
@@ -2182,15 +2215,12 @@
                 "symfony/process": "^6.4 || ^7.1",
                 "symfony/var-dumper": "^6.4 || ^7.1"
             },
-            "suggest": {
-                "async-aws/bedrock-runtime": "For using the Bedrock platform.",
-                "codewithkyrian/transformers": "For using the TransformersPHP with FFI to run models in PHP."
-            },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/ai",
-                    "url": "https://github.com/symfony/ai"
+                    "url": "https://github.com/symfony/ai",
+                    "name": "symfony/ai"
                 }
             },
             "autoload": {
@@ -2198,12 +2228,7 @@
                     "Symfony\\AI\\Platform\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Symfony\\AI\\Platform\\Tests\\": "tests/",
-                    "Symfony\\AI\\Fixtures\\": "../../fixtures"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2224,17 +2249,38 @@
                 "inference",
                 "transformers"
             ],
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/symfony/ai-platform/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-07-17T20:08:09+00:00"
         },
         {
             "name": "symfony/ai-store",
             "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/ai-store.git",
+                "reference": "74d4b5eca1aca4bda6e57d4b1eb774a9cd9ecf5e"
+            },
             "dist": {
-                "type": "path",
-                "url": "../src/store",
-                "reference": "b74fe318350ea22aee3318589831060d8479ef5a"
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/ai-store/zipball/74d4b5eca1aca4bda6e57d4b1eb774a9cd9ecf5e",
+                "reference": "74d4b5eca1aca4bda6e57d4b1eb774a9cd9ecf5e",
+                "shasum": ""
             },
             "require": {
                 "ext-fileinfo": "*",
@@ -2243,8 +2289,7 @@
                 "symfony/ai-platform": "@dev",
                 "symfony/clock": "^6.4 || ^7.1",
                 "symfony/http-client": "^6.4 || ^7.1",
-                "symfony/uid": "^6.4 || ^7.1",
-                "webmozart/assert": "^1.11"
+                "symfony/uid": "^6.4 || ^7.1"
             },
             "conflict": {
                 "mongodb/mongodb": "<1.21"
@@ -2255,22 +2300,15 @@
                 "ext-pdo": "*",
                 "mongodb/mongodb": "^1.21 || ^2.0",
                 "phpstan/phpstan": "^2.0",
-                "phpstan/phpstan-webmozart-assert": "^2.0",
                 "phpunit/phpunit": "^11.5",
                 "probots-io/pinecone-php": "^1.0"
             },
-            "suggest": {
-                "codewithkyrian/chromadb-php": "For using the ChromaDB as retrieval vector store.",
-                "doctrine/dbal": "For using MariaDB via Doctrine as retrieval vector store",
-                "ext-pdo": "For using MariaDB as retrieval vector store.",
-                "mongodb/mongodb": "For using MongoDB Atlas as retrieval vector store.",
-                "probots-io/pinecone-php": "For using the Pinecone as retrieval vector store."
-            },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/ai",
-                    "url": "https://github.com/symfony/ai"
+                    "url": "https://github.com/symfony/ai",
+                    "name": "symfony/ai"
                 }
             },
             "autoload": {
@@ -2278,11 +2316,7 @@
                     "Symfony\\AI\\Store\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Symfony\\AI\\Store\\Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2303,9 +2337,24 @@
                 "mongodb",
                 "pinecone"
             ],
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/symfony/ai-store/tree/main"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-07-17T08:55:01+00:00"
         },
         {
             "name": "symfony/asset",
@@ -6911,16 +6960,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.80.0",
+            "version": "v3.84.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "050bfba7a3f1716522075118a60e934344053b34"
+                "reference": "8208dabb176cbc03a76df5a908220dfb75c0af9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/050bfba7a3f1716522075118a60e934344053b34",
-                "reference": "050bfba7a3f1716522075118a60e934344053b34",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/8208dabb176cbc03a76df5a908220dfb75c0af9a",
+                "reference": "8208dabb176cbc03a76df5a908220dfb75c0af9a",
                 "shasum": ""
             },
             "require": {
@@ -6957,22 +7006,22 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.80.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.84.0"
             },
-            "time": "2025-07-06T21:01:12+00:00"
+            "time": "2025-07-15T18:22:22+00:00"
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.17",
+            "version": "2.1.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "89b5ef665716fa2a52ecd2633f21007a6a349053"
+                "reference": "ee1f390b7a70cdf74a2b737e554f68afea885db7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/89b5ef665716fa2a52ecd2633f21007a6a349053",
-                "reference": "89b5ef665716fa2a52ecd2633f21007a6a349053",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ee1f390b7a70cdf74a2b737e554f68afea885db7",
+                "reference": "ee1f390b7a70cdf74a2b737e554f68afea885db7",
                 "shasum": ""
             },
             "require": {
@@ -7017,7 +7066,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-21T20:55:28+00:00"
+            "time": "2025-07-17T17:22:31+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -7356,16 +7405,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.5.26",
+            "version": "11.5.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "4ad8fe263a0b55b54a8028c38a18e3c5bef312e0"
+                "reference": "446d43867314781df7e9adf79c3ec7464956fd8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4ad8fe263a0b55b54a8028c38a18e3c5bef312e0",
-                "reference": "4ad8fe263a0b55b54a8028c38a18e3c5bef312e0",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/446d43867314781df7e9adf79c3ec7464956fd8f",
+                "reference": "446d43867314781df7e9adf79c3ec7464956fd8f",
                 "shasum": ""
             },
             "require": {
@@ -7375,7 +7424,7 @@
                 "ext-mbstring": "*",
                 "ext-xml": "*",
                 "ext-xmlwriter": "*",
-                "myclabs/deep-copy": "^1.13.1",
+                "myclabs/deep-copy": "^1.13.3",
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.2",
@@ -7437,7 +7486,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.26"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.27"
             },
             "funding": [
                 {
@@ -7461,7 +7510,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-07-04T05:58:21+00:00"
+            "time": "2025-07-11T04:10:06+00:00"
         },
         {
             "name": "sebastian/cli-parser",

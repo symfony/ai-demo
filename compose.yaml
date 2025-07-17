@@ -3,10 +3,6 @@ services:
     image: dunglas/frankenphp
     volumes:
       - ./:/app
-      - ../src/agent:/src/agent
-      - ../src/ai-bundle:/src/ai-bundle
-      - ../src/platform:/src/platform
-      - ../src/store:/src/store
     ports:
       - 443:443
     tty: true
@@ -15,10 +11,6 @@ services:
     image: composer:latest
     volumes:
       - ./:/app
-      - ../src/agent:/src/agent
-      - ../src/ai-bundle:/src/ai-bundle
-      - ../src/platform:/src/platform
-      - ../src/store:/src/store
 
   chromadb:
     image: chromadb/chroma:0.5.23
