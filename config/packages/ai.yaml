@@ -46,10 +46,9 @@ ai:
             system_prompt: 'You are a friendly chatbot that likes to have a conversation with users and asks them some questions.'
             tools:
                 # Agent in agent 🤯
-                - service: 'ai.agent.blog'
+                - agent: 'blog'
                   name: 'symfony_blog'
                   description: 'Can answer questions based on the Symfony blog.'
-                  is_agent: true
     store:
         chroma_db:
             symfonycon:
