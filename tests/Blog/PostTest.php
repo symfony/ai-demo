@@ -13,13 +13,15 @@ namespace App\Tests\Blog;
 
 use App\Blog\Post;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;
 
 #[CoversClass(Post::class)]
 final class PostTest extends TestCase
 {
-    public function testPostToString(): void
+    #[Test]
+    public function postToString(): void
     {
         $post = new Post(
             Uuid::v4(),
@@ -41,7 +43,8 @@ final class PostTest extends TestCase
         self::assertSame($expected, $post->toString());
     }
 
-    public function testPostToArray(): void
+    #[Test]
+    public function postToArray(): void
     {
         $id = Uuid::v4();
         $post = new Post(

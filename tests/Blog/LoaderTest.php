@@ -14,6 +14,7 @@ namespace App\Tests\Blog;
 use App\Blog\FeedLoader;
 use App\Blog\Post;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\MockHttpClient;
@@ -23,7 +24,8 @@ use Symfony\Component\HttpClient\Response\MockResponse;
 #[UsesClass(Post::class)]
 final class LoaderTest extends TestCase
 {
-    public function testLoad(): void
+    #[Test]
+    public function load(): void
     {
         $response = MockResponse::fromFile(__DIR__.'/fixtures/blog.rss');
         $client = new MockHttpClient($response);

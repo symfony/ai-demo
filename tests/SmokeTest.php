@@ -13,6 +13,7 @@ namespace App\Tests;
 
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\UX\LiveComponent\Test\InteractsWithLiveComponents;
 
@@ -21,7 +22,8 @@ final class SmokeTest extends WebTestCase
 {
     use InteractsWithLiveComponents;
 
-    public function testIndex(): void
+    #[Test]
+    public function index(): void
     {
         $client = static::createClient();
         $client->request('GET', '/');
@@ -31,8 +33,9 @@ final class SmokeTest extends WebTestCase
         self::assertSelectorCount(5, '.card');
     }
 
+    #[Test]
     #[DataProvider('provideChats')]
-    public function testChats(string $path, string $expectedHeadline): void
+    public function chats(string $path, string $expectedHeadline): void
     {
         $client = static::createClient();
         $client->request('GET', $path);
