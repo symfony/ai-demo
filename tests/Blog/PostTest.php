@@ -40,7 +40,7 @@ final class PostTest extends TestCase
             This is a test post.
             TEXT;
 
-        self::assertSame($expected, $post->toString());
+        $this->assertSame($expected, $post->toString());
     }
 
     #[Test]
@@ -67,6 +67,6 @@ final class PostTest extends TestCase
             'date' => '2024-12-08',
         ];
 
-        self::assertSame($expected, $post->toArray());
+        $this->assertSame($expected, $post->toArray());
     }
 }
