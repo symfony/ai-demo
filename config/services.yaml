@@ -19,10 +19,10 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    Symfony\AI\McpSdk\Capability\Tool\ToolExecutorInterface:
+    mcp.tool_executor:
         class: Symfony\AI\McpSdk\Capability\ToolChain
         arguments:
             - ['@App\MCP\Tools\CurrentTimeTool']
 
-    Symfony\AI\McpSdk\Capability\Tool\CollectionInterface:
-        alias: Symfony\AI\McpSdk\Capability\Tool\ToolExecutorInterface
+    mcp.tool_collection:
+        alias: mcp.tool_executor
