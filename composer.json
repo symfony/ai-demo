@@ -103,16 +103,6 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "importmap:install": "symfony-cmd"
-        },
-        "pipeline": [
-            "composer validate --strict",
-            "php -l src/**/*.php tests/**/*.php",
-            "bin/console lint:twig templates",
-            "bin/console lint:yaml config",
-            "bin/console lint:container",
-            "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix",
-            "phpstan analyse",
-            "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html=coverage"
-        ]
+        }
     }
 }
