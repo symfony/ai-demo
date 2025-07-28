@@ -22,6 +22,6 @@ return [
     Symfony\UX\Turbo\TurboBundle::class => ['all' => true],
     Symfony\UX\Icons\UXIconsBundle::class => ['all' => true],
     Symfony\UX\Typed\TypedBundle::class => ['all' => true],
-    Symfony\AI\AIBundle\AIBundle::class => ['all' => true],
+    Symfony\AI\AiBundle\AiBundle::class => ['all' => true],
     Symfony\AI\McpBundle\McpBundle::class => ['all' => true],
 ];
