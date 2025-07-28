@@ -12,7 +12,7 @@
 namespace App\Audio;
 
 use Symfony\AI\Agent\AgentInterface;
-use Symfony\AI\Platform\Bridge\OpenAI\Whisper;
+use Symfony\AI\Platform\Bridge\OpenAi\Whisper;
 use Symfony\AI\Platform\Message\Content\Audio;
 use Symfony\AI\Platform\Message\Message;
 use Symfony\AI\Platform\Message\MessageBag;

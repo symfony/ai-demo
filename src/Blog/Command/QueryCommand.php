@@ -12,7 +12,7 @@
 namespace App\Blog\Command;
 
 use Codewithkyrian\ChromaDB\Client;
-use Symfony\AI\Platform\Bridge\OpenAI\Embeddings;
+use Symfony\AI\Platform\Bridge\OpenAi\Embeddings;
 use Symfony\AI\Platform\PlatformInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
