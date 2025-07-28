@@ -6,8 +6,8 @@ ai:
         blog:
             # platform: 'ai.platform.anthropic'
             model:
-                class: 'Symfony\AI\Platform\Bridge\OpenAi\GPT'
-                name: !php/const Symfony\AI\Platform\Bridge\OpenAi\GPT::GPT_4O_MINI
+                class: 'Symfony\AI\Platform\Bridge\OpenAi\Gpt'
+                name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Gpt::GPT_4O_MINI
             tools:
                 - 'Symfony\AI\Agent\Toolbox\Tool\SimilaritySearch'
                 - service: 'clock'
@@ -16,8 +16,8 @@ ai:
                   method: 'now'
         stream:
             model:
-                class: 'Symfony\AI\Platform\Bridge\OpenAi\GPT'
-                name: !php/const Symfony\AI\Platform\Bridge\OpenAi\GPT::GPT_4O_MINI
+                class: 'Symfony\AI\Platform\Bridge\OpenAi\Gpt'
+                name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Gpt::GPT_4O_MINI
             system_prompt: |
                 You are an example chat application where messages from the LLM are streamed to the user using
                 Server-Sent Events via `symfony/ux-turbo` / Turbo Streams. This example does not use any custom
@@ -26,13 +26,13 @@ ai:
             tools: false
         youtube:
             model:
-                class: 'Symfony\AI\Platform\Bridge\OpenAi\GPT'
-                name: !php/const Symfony\AI\Platform\Bridge\OpenAi\GPT::GPT_4O_MINI
+                class: 'Symfony\AI\Platform\Bridge\OpenAi\Gpt'
+                name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Gpt::GPT_4O_MINI
             tools: false
         wikipedia:
             model:
-                class: 'Symfony\AI\Platform\Bridge\OpenAi\GPT'
-                name: !php/const Symfony\AI\Platform\Bridge\OpenAi\GPT::GPT_4O_MINI
+                class: 'Symfony\AI\Platform\Bridge\OpenAi\Gpt'
+                name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Gpt::GPT_4O_MINI
                 options:
                     temperature: 0.5
             system_prompt: 'Please answer the users question based on Wikipedia and provide a link to the article.'
@@ -41,8 +41,8 @@ ai:
                 - 'Symfony\AI\Agent\Toolbox\Tool\Wikipedia'
         audio:
             model:
-                class: 'Symfony\AI\Platform\Bridge\OpenAi\GPT'
-                name: !php/const Symfony\AI\Platform\Bridge\OpenAi\GPT::GPT_4O_MINI
+                class: 'Symfony\AI\Platform\Bridge\OpenAi\Gpt'
+                name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Gpt::GPT_4O_MINI
             system_prompt: 'You are a friendly chatbot that likes to have a conversation with users and asks them some questions.'
             tools:
                 # Agent in agent 🤯

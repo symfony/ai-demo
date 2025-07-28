@@ -11,7 +11,7 @@
 
 namespace App\Video;
 
-use Symfony\AI\Platform\Bridge\OpenAi\GPT;
+use Symfony\AI\Platform\Bridge\OpenAi\Gpt;
 use Symfony\AI\Platform\Message\Content\Image;
 use Symfony\AI\Platform\Message\Message;
 use Symfony\AI\Platform\Message\MessageBag;
@@ -47,7 +47,7 @@ final class TwigComponent
             Message::ofUser($instruction, Image::fromDataUrl($image))
         );
 
-        $result = $this->platform->invoke(new GPT(GPT::GPT_4O_MINI), $messageBag, [
+        $result = $this->platform->invoke(new Gpt(Gpt::GPT_4O_MINI), $messageBag, [
             'max_tokens' => 100,
         ]);
 
