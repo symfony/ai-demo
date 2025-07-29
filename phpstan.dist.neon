@@ -6,3 +6,6 @@ parameters:
         - public/
         - src/
         - tests/
+    ignoreErrors:
+        -
+            message: "#^Method .*::test.*\\(\\) has no return type specified\\.$#"
