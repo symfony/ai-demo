@@ -39,11 +39,12 @@ Checkout the repository, start the docker environment and install dependencies:
 ```shell
 git clone git@github.com:symfony/ai-demo.git
 cd ai-demo
+composer install
 docker compose up -d
-docker compose run composer install
+symfony serve -d
 ```
 
-Now you should be able to open https://localhost/ in your browser,
+Now you should be able to open https://localhost:8000/ in your browser,
 and the chatbot UI should be available for you to start chatting.
 
 > [!NOTE]
@@ -61,7 +62,7 @@ echo "OPENAI_API_KEY='sk-...'" > .env.local
 Verify the success of this step by running the following command:
 
 ```shell
-docker compose exec app bin/console debug:dotenv
+symfony console debug:dotenv
 ```
 
 You should be able to see the `OPENAI_API_KEY` in the list of environment variables.
@@ -73,13 +74,13 @@ The [Chroma DB](https://www.trychroma.com/) is a vector store that is used to st
 To initialize the Chroma DB, you need to run the following command:
 
 ```shell
-docker compose exec app bin/console app:blog:embed -vv
+symfony console app:blog:embed -vv
 ```
 
 Now you should be able to run the test command and get some results:
 
 ```shell
-docker compose exec app bin/console app:blog:query
+symfony console app:blog:query
 ```
 
 **Don't forget to set up the project in your favorite IDE or editor.**
@@ -115,7 +116,7 @@ To add the server, add the following configuration to your MCP Client's settings
 You can test the MCP server by running the following command to start the MCP client:
 
 ```shell
-php bin/console mcp:server
+symfony console mcp:server
 ```
 
 Then, paste `{"method":"tools/list","jsonrpc":"2.0","id":1}` to list the tools available on the MCP server.

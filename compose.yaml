@@ -1,19 +1,8 @@
 services:
-  app:
-    image: dunglas/frankenphp
-    volumes:
-      - ./:/app
-    ports:
-      - 443:443
-    tty: true
-
-  composer:
-    image: composer:latest
-    volumes:
-      - ./:/app
-
   chromadb:
     image: chromadb/chroma:0.5.23
+    ports:
+      - '8080:8000'
     volumes:
       - ./chromadb:/chroma/chroma
     environment:
