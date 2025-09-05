@@ -13,13 +13,13 @@ namespace App\Blog;
 
 use Symfony\AI\Store\Document\Metadata;
 use Symfony\AI\Store\Document\TextDocument;
-use Symfony\AI\Store\Indexer;
+use Symfony\AI\Store\IndexerInterface;
 
 final readonly class Embedder
 {
     public function __construct(
         private FeedLoader $loader,
-        private Indexer $indexer,
+        private IndexerInterface $indexer,
     ) {
     }
 
