@@ -53,11 +53,15 @@ ai:
         chroma_db:
             symfonycon:
                 collection: 'symfony_blog'
-    indexer:
-        default:
+    vectorizer:
+        openai_embeddings:
             model:
                 class: 'Symfony\AI\Platform\Bridge\OpenAi\Embeddings'
                 name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Embeddings::TEXT_ADA_002
+    indexer:
+        default:
+            vectorizer: 'ai.vectorizer.openai_embeddings'
+            store: 'ai.store.chroma_db.symfonycon'
 
 services:
     _defaults:
