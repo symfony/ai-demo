@@ -16,23 +16,19 @@ use Symfony\AI\Platform\Bridge\OpenAi\Embeddings;
 use Symfony\AI\Platform\PlatformInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand('app:blog:query', description: 'Test command for querying the blog collection in Chroma DB.')]
-final class QueryCommand extends Command
+final class QueryCommand
 {
     public function __construct(
         private readonly Client $chromaClient,
         private readonly PlatformInterface $platform,
     ) {
-        parent::__construct();
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(SymfonyStyle $io): int
     {
-        $io = new SymfonyStyle($input, $output);
         $io->title('Testing Chroma DB Connection');
 
         $io->comment('Connecting to Chroma DB ...');
