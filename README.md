@@ -74,7 +74,7 @@ The [Chroma DB](https://www.trychroma.com/) is a vector store that is used to st
 To initialize the Chroma DB, you need to run the following command:
 
 ```shell
-symfony console app:blog:embed -vv
+symfony console ai:store:index blog -vv
 ```
 
 Now you should be able to run the test command and get some results:

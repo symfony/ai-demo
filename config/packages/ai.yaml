@@ -59,7 +59,11 @@ ai:
                 class: 'Symfony\AI\Platform\Bridge\OpenAi\Embeddings'
                 name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Embeddings::TEXT_ADA_002
     indexer:
-        default:
+        blog:
+            loader: 'App\Blog\FeedLoader'
+            source: 'https://feeds.feedburner.com/symfony/blog'
+            transformers:
+                - 'Symfony\AI\Store\Document\Transformer\TextTrimTransformer'
             vectorizer: 'ai.vectorizer.openai_embeddings'
             store: 'ai.store.chroma_db.symfonycon'
 
@@ -75,3 +79,5 @@ services:
     Symfony\AI\Agent\Toolbox\Tool\Wikipedia: ~
     Symfony\AI\Agent\Toolbox\Tool\SimilaritySearch:
         $vectorizer: '@ai.vectorizer.openai_embeddings'
+    
+    Symfony\AI\Store\Document\Transformer\TextTrimTransformer: ~

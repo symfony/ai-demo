@@ -11,11 +11,15 @@
 
 namespace App\Blog;
 
+use Symfony\AI\Store\Document\LoaderInterface;
+use Symfony\AI\Store\Document\Metadata;
+use Symfony\AI\Store\Document\TextDocument;
+use Symfony\AI\Store\Exception\InvalidArgumentException;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class FeedLoader
+final class FeedLoader implements LoaderInterface
 {
     public function __construct(
         private HttpClientInterface $httpClient,
@@ -23,11 +27,17 @@ class FeedLoader
     }
 
     /**
-     * @return Post[]
+     * @param ?string              $source  RSS feed URL
+     * @param array<string, mixed> $options
+     *
+     * @return iterable<TextDocument>
      */
-    public function load(): array
+    public function load(?string $source, array $options = []): iterable
     {
-        $result = $this->httpClient->request('GET', 'https://feeds.feedburner.com/symfony/blog');
+        if (null === $source) {
+            throw new InvalidArgumentException('FeedLoader requires a RSS feed URL as source, null given.');
+        }
+        $result = $this->httpClient->request('GET', $source);
 
         $posts = [];
         $crawler = new Crawler($result->getContent());
@@ -44,6 +54,8 @@ class FeedLoader
             );
         });
 
-        return $posts;
+        foreach ($posts as $post) {
+            yield new TextDocument($post->id, $post->toString(), new Metadata($post->toArray()));
+        }
     }
 }
