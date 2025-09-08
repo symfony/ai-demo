@@ -74,4 +74,4 @@ services:
     #     $apiKey: '%env(SERP_API_KEY)%'
     Symfony\AI\Agent\Toolbox\Tool\Wikipedia: ~
     Symfony\AI\Agent\Toolbox\Tool\SimilaritySearch:
-        $model: '@ai.indexer.default.model'
+        $vectorizer: '@ai.vectorizer.openai_embeddings'
