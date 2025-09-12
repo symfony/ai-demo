@@ -79,5 +79,6 @@ services:
     Symfony\AI\Agent\Toolbox\Tool\Wikipedia: ~
     Symfony\AI\Agent\Toolbox\Tool\SimilaritySearch:
         $vectorizer: '@ai.vectorizer.openai_embeddings'
-    
+        $store: '@ai.store.chroma_db.symfonycon'
+
     Symfony\AI\Store\Document\Transformer\TextTrimTransformer: ~
