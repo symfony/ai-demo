@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+>
+    <channel>
+        <title>Symfony Blog</title>
+        <atom:link href="https://feeds.feedburner.com/symfony/blog" rel="self" type="application/rss+xml" />
+        <link>https://symfony.com/blog/</link>
+        <description>Most recent posts published on the Symfony project blog</description>
+        <pubDate>Fri, 12 Sep 2025 14:25:38 +0200</pubDate>
+        <lastBuildDate>Thu, 11 Sep 2025 14:30:00 +0200</lastBuildDate>
+        <language>en</language>
+                        <item>
+            <title><![CDATA[Save the date, SymfonyDay Montreal 2026!]]></title>
+            <link>https://symfony.com/blog/save-the-date-symfonyday-montreal-2026?utm_source=Symfony%20Blog%20Feed&amp;utm_medium=feed</link>
+            <description>
+    
+
+
+We're thrilled to announce that SymfonyDay Montreal is happening on June 4, 2026! 🎉
+
+Mark your calendars, tell your friends, and get ready for a day full of inspiring talks, networking opportunities, and the vibrant energy of the Symfony community…</description>
+            <content:encoded><![CDATA[
+                                <p><a class="block text-center" href="https://live.symfony.com/2026-montreal" title="Blog 1200X440Px">
+    <img src="https://symfony.com/uploads/assets/blog/BLOG-1200x440px.png" alt="Blog 1200X440Px">
+</a></p>
+
+<p>We're thrilled to announce that SymfonyDay Montreal is happening on <strong>June 4, 2026! 🎉</strong></p>
+
+<p>Mark your calendars, tell your friends, and get ready for a day full of inspiring talks, networking opportunities, and the vibrant energy of the Symfony community in Canada! 🍁</p>
+
+<p>🎟️ Register now to secure your seat, <a href="https://live.symfony.com/2026-montreal/registration/"><strong>here!</strong></a></p>
+
+<hr />
+
+<p>📝<strong>Call for papers is open!</strong></p>
+
+<p><strong><a href="https://live.symfony.com/2026-montreal/cfp">Submit your talk</a></strong> for SymfonyDay Montreal 2026! Every selected speaker will receive a complimentary conference ticket and a speaker gift! Speakers who do not live in the conference city will also have their travel and accommodation expenses covered.</p>
+
+<p>If you have never spoken at a conference before, you can take advantage of our <strong><a href="https://symfony.com/doc/current/contributing/community/speaker-mentoring.html">speaker mentoring program!</a></strong> Experienced speakers will gladly assist you in preparing for your conference, whether it involves creating your slides or rehearsing your talk. Feel free to seek advice in the #diversity or #speaker-mentoring channels on the <strong><a href="https://symfony.com/slack">Symfony Devs Slack</a></strong> or include comments requesting guidance when submitting your talk proposal.</p>
+
+<hr />
+
+<p>🤝 <strong>Want to support the event?</strong></p>
+
+<p>Become a sponsor and showcase your brand to an engaged audience of developers.</p>
+
+<p>⚡Contact Hadrien Cren by <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#58;e&#x76;&#x65;&#x6e;&#x74;&#115;&#64;&#115;y&#x6d;&#x66;&#x6f;&#x6e;&#121;&#46;&#99;&#111;&#x6d;">email</a> to learn more about the options.</p>
+
+<p><strong>We can't wait to see you there!</strong></p>
+
+<p><a class="block text-center" href="https://linktr.ee/symfony">
+   <img src="https://symfony.com/uploads/assets/blog/Banner-BLOG.png" alt="Banner Blog">
+</a></p>
+
+                <hr style="margin-bottom: 5px" />
+                <div style="font-size: 90%">
+                    <a href="https://symfony.com/sponsor">Sponsor</a> the Symfony project.
+                </div>
+            ]]></content:encoded>
+            <guid isPermaLink="false">https://symfony.com/blog/save-the-date-symfonyday-montreal-2026?utm_source=Symfony%20Blog%20Feed&amp;utm_medium=feed</guid>
+            <dc:creator><![CDATA[ Paola Suárez ]]></dc:creator>
+            <pubDate>Thu, 11 Sep 2025 14:30:00 +0200</pubDate>
+            <comments>https://symfony.com/blog/save-the-date-symfonyday-montreal-2026?utm_source=Symfony%20Blog%20Feed&amp;utm_medium=feed#comments-list</comments>
+        </item>
+                        <item>
+            <title><![CDATA[SymfonyCon Amsterdam 2025: Call for IT student volunteers: Volunteer, Learn & Connect!]]></title>
+            <link>https://symfony.com/blog/symfonycon-amsterdam-2025-call-for-it-student-volunteers-volunteer-learn-and-connect?utm_source=Symfony%20Blog%20Feed&amp;utm_medium=feed</link>
+            <description>
+  
+
+
+🎓SymfonyCon Amsterdam 2025: Call for IT Student Volunteers!
+
+Are you an IT or computer science student looking to gain hands-on experience, grow your network, and take part in an international tech event? 🎤✨
+Symfony is looking for motivated student…</description>
+            <content:encoded><![CDATA[
+                                <p><a class="block text-center" href="https://live.symfony.com/2025-amsterdam-con/">
+  <img src="https://symfony.com/uploads/assets/blog/NL-BLOG-Banner.png" alt="Nl Blog Banner">
+</a></p>
+
+<p>🎓<strong>SymfonyCon Amsterdam 2025: Call for IT Student Volunteers!</strong></p>
+
+<p>Are you an IT or computer science student looking to gain hands-on experience, grow your network, and take part in an international tech event? 🎤✨
+Symfony is looking for motivated student volunteers to join the adventure at SymfonyCon Amsterdam 2025!</p>
+
+<p>📍<strong>Where:</strong> Amsterdam, The Netherlands</p>
+
+<p>🗓️<strong>When:</strong> November 28–29, 2025</p>
+
+<p>Volunteering with us means helping out for one day and getting a <strong>free ticket</strong> to attend the conference the other day, so you don't miss out on the action!</p>
+
+<hr />
+
+<p>💼 <strong>Volunteer Tasks</strong></p>
+
+<p>As a volunteer, you'll be assigned to:</p>
+
+<p>✔️Welcome attendees</p>
+
+<p>✔️Provide directions and information</p>
+
+<p>✔️Help ensure everything runs smoothly!</p>
+
+<hr />
+
+<p>✅ <strong>Requirements</strong></p>
+
+<p>To apply, you must:</p>
+
+<p>✔️Be a student in computer science / IT (all backgrounds welcome!)</p>
+
+<p>✔️Be curious about careers in development or tech</p>
+
+<p>✔️Be available for at least one full day during the event</p>
+
+<p>✔️Speak English (conference language)</p>
+
+<hr />
+
+<p>🎁 <strong>What You Get</strong></p>
+
+<p>Free access to the full 2-day SymfonyCon Amsterdam 2025 conference</p>
+
+<p>✔️Opportunities to network with developers, speakers, and community leaders</p>
+
+<p>✔️Delicious lunches included</p>
+
+<p>✔️An unforgettable experience in an inclusive and friendly environment!</p>
+
+<hr />
+
+<p>🚫 <strong>Please note:</strong></p>
+
+<p>We are unable to cover:</p>
+
+<p>✔️Travel or accommodation costs ✔️Dinners or evening expenses</p>
+
+<hr />
+
+<p>💌 <strong>How to Apply:</strong></p>
+
+<p>Interested? Send us an email at <em>events@symfony.com</em> with:</p>
+
+<p>✔️Your name, school, and area of study</p>
+
+<p>✔️The reason you'd like to volunteer</p>
+
+<p>✔️Confirmation of your availability on November 28 or 29, 2025</p>
+
+<hr />
+
+<p><strong>Be part of the Symfony community, gain valuable experience, and help make this event amazing!
+We can't wait to meet you! 🧑‍💻💬 #SymfonyCon</strong></p>
+
+<hr />
+
+<p><a class="block text-center" href="https://linktr.ee/symfony">
+   <img src="https://symfony.com/uploads/assets/blog/Banner-BLOG.png" alt="Banner Blog">
+</a></p>
+
+                <hr style="margin-bottom: 5px" />
+                <div style="font-size: 90%">
+                    <a href="https://symfony.com/sponsor">Sponsor</a> the Symfony project.
+                </div>
+            ]]></content:encoded>
+            <guid isPermaLink="false">https://symfony.com/blog/symfonycon-amsterdam-2025-call-for-it-student-volunteers-volunteer-learn-and-connect?utm_source=Symfony%20Blog%20Feed&amp;utm_medium=feed</guid>
+            <dc:creator><![CDATA[ Paola Suárez ]]></dc:creator>
+            <pubDate>Wed, 10 Sep 2025 09:00:00 +0200</pubDate>
+            <comments>https://symfony.com/blog/symfonycon-amsterdam-2025-call-for-it-student-volunteers-volunteer-learn-and-connect?utm_source=Symfony%20Blog%20Feed&amp;utm_medium=feed#comments-list</comments>
+        </item>
+            </channel>
+</rss>
