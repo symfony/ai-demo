@@ -60,7 +60,7 @@ ai:
                 name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Embeddings::TEXT_ADA_002
     indexer:
         blog:
-            loader: 'App\Blog\FeedLoader'
+            loader: 'Symfony\AI\Store\Document\Loader\RssFeedLoader'
             source: 'https://feeds.feedburner.com/symfony/blog'
             transformers:
                 - 'Symfony\AI\Store\Document\Transformer\TextTrimTransformer'
@@ -81,4 +81,5 @@ services:
         $vectorizer: '@ai.vectorizer.openai'
         $store: '@ai.store.chroma_db.symfonycon'
 
+    Symfony\AI\Store\Document\Loader\RssFeedLoader: ~
     Symfony\AI\Store\Document\Transformer\TextTrimTransformer: ~
