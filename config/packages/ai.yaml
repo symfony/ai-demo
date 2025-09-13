@@ -35,8 +35,9 @@ ai:
                 name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Gpt::GPT_4O_MINI
                 options:
                     temperature: 0.5
-            system_prompt: 'Please answer the users question based on Wikipedia and provide a link to the article.'
-            include_tools: true
+            system_prompt:
+                prompt: 'Please answer the users question based on Wikipedia and provide a link to the article.'
+                include_tools: true
             tools:
                 - 'Symfony\AI\Agent\Toolbox\Tool\Wikipedia'
         audio:
