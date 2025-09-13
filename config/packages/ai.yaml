@@ -18,7 +18,7 @@ ai:
             model:
                 class: 'Symfony\AI\Platform\Bridge\OpenAi\Gpt'
                 name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Gpt::GPT_4O_MINI
-            system_prompt: |
+            prompt: |
                 You are an example chat application where messages from the LLM are streamed to the user using
                 Server-Sent Events via `symfony/ux-turbo` / Turbo Streams. This example does not use any custom
                 javascript and solely relies on the built-in `live` & `turbo_stream` Stimulus controllers.
@@ -35,8 +35,8 @@ ai:
                 name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Gpt::GPT_4O_MINI
                 options:
                     temperature: 0.5
-            system_prompt:
-                prompt: 'Please answer the users question based on Wikipedia and provide a link to the article.'
+            prompt:
+                text: 'Please answer the users question based on Wikipedia and provide a link to the article.'
                 include_tools: true
             tools:
                 - 'Symfony\AI\Agent\Toolbox\Tool\Wikipedia'
@@ -44,7 +44,7 @@ ai:
             model:
                 class: 'Symfony\AI\Platform\Bridge\OpenAi\Gpt'
                 name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Gpt::GPT_4O_MINI
-            system_prompt: 'You are a friendly chatbot that likes to have a conversation with users and asks them some questions.'
+            prompt: 'You are a friendly chatbot that likes to have a conversation with users and asks them some questions.'
             tools:
                 # Agent in agent 🤯
                 - agent: 'blog'
