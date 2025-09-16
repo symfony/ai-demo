@@ -4,7 +4,6 @@ ai:
             api_key: '%env(OPENAI_API_KEY)%'
     agent:
         blog:
-            # platform: 'ai.platform.anthropic'
             model:
                 class: 'Symfony\AI\Platform\Bridge\OpenAi\Gpt'
                 name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Gpt::GPT_4O_MINI
