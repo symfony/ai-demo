@@ -49,7 +49,7 @@ final class FeedLoader implements LoaderInterface
             $content = $contentEncoded ? (new Crawler($contentEncoded))->text() : '';
             $author = $node->filter('dc\:creator')->text() ?: '';
             $pubDate = $node->filter('pubDate')->text();
-            
+
             $posts[] = new Post(
                 Uuid::v5(Uuid::fromString('6ba7b810-9dad-11d1-80b4-00c04fd430c8'), $title),
                 $title,
