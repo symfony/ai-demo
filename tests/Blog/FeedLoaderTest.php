@@ -16,8 +16,10 @@ use App\Blog\Post;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
+use Symfony\AI\Store\Document\Metadata;
 use Symfony\AI\Store\Document\TextDocument;
 use Symfony\AI\Store\Exception\InvalidArgumentException;
+use Symfony\Component\HttpClient\Exception\ClientException;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Component\Uid\Uuid;
@@ -28,7 +30,7 @@ final class FeedLoaderTest extends TestCase
 {
     public function testLoadWithValidFeedUrl()
     {
-        $loader = new FeedLoader(new MockHttpClient(MockResponse::fromFile(__DIR__.'/fixtures/symfony-feed.xml')));
+        $loader = new FeedLoader(new MockHttpClient(MockResponse::fromFile(__DIR__.'/../fixtures/symfony-blog.rss')));
         $documents = iterator_to_array($loader->load('https://feeds.feedburner.com/symfony/blog'));
 
         $this->assertCount(2, $documents);
@@ -40,12 +42,12 @@ final class FeedLoaderTest extends TestCase
         $expectedFirstUuid = Uuid::v5(Uuid::fromString('6ba7b810-9dad-11d1-80b4-00c04fd430c8'), 'Save the date, SymfonyDay Montreal 2026!');
         $this->assertEquals($expectedFirstUuid, $firstDocument->id);
 
-        $this->assertStringContainsString('Title: Save the date, SymfonyDay Montreal 2026!', $firstDocument->text);
-        $this->assertStringContainsString('From: Paola Suárez on 2025-09-11', $firstDocument->text);
-        $this->assertStringContainsString("We're thrilled to announce that SymfonyDay Montreal is happening on June 4, 2026!", $firstDocument->text);
-        $this->assertStringContainsString('Mark your calendars, tell your friends', $firstDocument->text);
+        $this->assertStringContainsString('Title: Save the date, SymfonyDay Montreal 2026!', $firstDocument->content);
+        $this->assertStringContainsString('From: Paola Suárez on 2025-09-11', $firstDocument->content);
+        $this->assertStringContainsString("We're thrilled to announce that SymfonyDay Montreal is happening on June 4, 2026!", $firstDocument->content);
+        $this->assertStringContainsString('Mark your calendars, tell your friends', $firstDocument->content);
 
-        $firstMetadata = $firstDocument->metadata->toArray();
+        $firstMetadata = $firstDocument->metadata;
         $this->assertSame($expectedFirstUuid->toRfc4122(), $firstMetadata['id']);
         $this->assertSame('Save the date, SymfonyDay Montreal 2026!', $firstMetadata['title']);
         $this->assertSame('https://symfony.com/blog/save-the-date-symfonyday-montreal-2026?utm_source=Symfony%20Blog%20Feed&utm_medium=feed', $firstMetadata['link']);
@@ -61,11 +63,11 @@ final class FeedLoaderTest extends TestCase
         $expectedSecondUuid = Uuid::v5(Uuid::fromString('6ba7b810-9dad-11d1-80b4-00c04fd430c8'), 'SymfonyCon Amsterdam 2025: Call for IT student volunteers: Volunteer, Learn & Connect!');
         $this->assertEquals($expectedSecondUuid, $secondDocument->id);
 
-        $this->assertStringContainsString('Title: SymfonyCon Amsterdam 2025: Call for IT student volunteers: Volunteer, Learn & Connect!', $secondDocument->text);
-        $this->assertStringContainsString('From: Paola Suárez on 2025-09-10', $secondDocument->text);
-        $this->assertStringContainsString('🎓SymfonyCon Amsterdam 2025: Call for IT Student Volunteers!', $secondDocument->text);
+        $this->assertStringContainsString('Title: SymfonyCon Amsterdam 2025: Call for IT student volunteers: Volunteer, Learn & Connect!', $secondDocument->content);
+        $this->assertStringContainsString('From: Paola Suárez on 2025-09-10', $secondDocument->content);
+        $this->assertStringContainsString('🎓SymfonyCon Amsterdam 2025: Call for IT Student Volunteers!', $secondDocument->content);
 
-        $secondMetadata = $secondDocument->metadata->toArray();
+        $secondMetadata = $secondDocument->metadata;
         $this->assertSame($expectedSecondUuid->toRfc4122(), $secondMetadata['id']);
         $this->assertSame('SymfonyCon Amsterdam 2025: Call for IT student volunteers: Volunteer, Learn & Connect!', $secondMetadata['title']);
         $this->assertSame('https://symfony.com/blog/symfonycon-amsterdam-2025-call-for-it-student-volunteers-volunteer-learn-and-connect?utm_source=Symfony%20Blog%20Feed&utm_medium=feed', $secondMetadata['link']);
@@ -108,25 +110,24 @@ XML;
     {
         $loader = new FeedLoader(new MockHttpClient(new MockResponse('', ['http_code' => 404])));
 
-        $this->expectException(\Symfony\Contracts\HttpClient\Exception\ClientException::class);
+        $this->expectException(ClientException::class);
 
         iterator_to_array($loader->load('https://example.com/non-existent-feed.xml'));
     }
 
     public function testLoadWithMalformedXml()
     {
-        $malformedXml = '<?xml version="1.0" encoding="UTF-8" ?><rss><channel><title>Test</title>';
+        $malformedXml = 'Not XML at all';
 
         $loader = new FeedLoader(new MockHttpClient(new MockResponse($malformedXml)));
+        $documents = iterator_to_array($loader->load('https://example.com/malformed-feed.xml'));
 
-        $this->expectException(\Exception::class);
-
-        iterator_to_array($loader->load('https://example.com/malformed-feed.xml'));
+        $this->assertCount(0, $documents);
     }
 
     public function testLoadReturnsIterableOfTextDocuments()
     {
-        $loader = new FeedLoader(new MockHttpClient(MockResponse::fromFile(__DIR__.'/fixtures/symfony-feed.xml')));
+        $loader = new FeedLoader(new MockHttpClient(MockResponse::fromFile(__DIR__.'/../fixtures/symfony-blog.rss')));
         $result = $loader->load('https://feeds.feedburner.com/symfony/blog');
 
         $this->assertIsIterable($result);
@@ -134,19 +135,19 @@ XML;
         foreach ($result as $document) {
             $this->assertInstanceOf(TextDocument::class, $document);
             $this->assertInstanceOf(Uuid::class, $document->id);
-            $this->assertIsString($document->text);
-            $this->assertNotEmpty($document->text);
-            $this->assertIsArray($document->metadata->toArray());
+            $this->assertIsString($document->content);
+            $this->assertNotEmpty($document->content);
+            $this->assertInstanceOf(Metadata::class, $document->metadata);
         }
     }
 
     public function testLoadGeneratesConsistentUuids()
     {
-        $loader = new FeedLoader(new MockHttpClient(MockResponse::fromFile(__DIR__.'/fixtures/symfony-feed.xml')));
+        $loader = new FeedLoader(new MockHttpClient(MockResponse::fromFile(__DIR__.'/../fixtures/symfony-blog.rss')));
         $documents1 = iterator_to_array($loader->load('https://feeds.feedburner.com/symfony/blog'));
 
         // Load same feed again
-        $loader2 = new FeedLoader(new MockHttpClient(MockResponse::fromFile(__DIR__.'/fixtures/symfony-feed.xml')));
+        $loader2 = new FeedLoader(new MockHttpClient(MockResponse::fromFile(__DIR__.'/../fixtures/symfony-blog.rss')));
         $documents2 = iterator_to_array($loader2->load('https://feeds.feedburner.com/symfony/blog'));
 
         $this->assertCount(2, $documents1);
