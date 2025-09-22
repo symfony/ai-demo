@@ -42,7 +42,7 @@ ai:
         audio:
             model:
                 class: 'Symfony\AI\Platform\Bridge\OpenAi\Gpt'
-                name: !php/const Symfony\AI\Platform\Bridge\OpenAi\Gpt::GPT_4O_MINI
+                name: 'gpt-4o-mini?temperature=1.0'
             prompt: 'You are a friendly chatbot that likes to have a conversation with users and asks them some questions.'
             tools:
                 # Agent in agent 🤯
