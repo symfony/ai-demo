@@ -12,11 +12,9 @@
 namespace App\Tests\Blog;
 
 use App\Blog\Chat;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\AI\Agent\MockAgent;
 use Symfony\AI\Platform\Message\AssistantMessage;
-use Symfony\AI\Platform\Message\Message;
 use Symfony\AI\Platform\Message\MessageBag;
 use Symfony\AI\Platform\Message\SystemMessage;
 use Symfony\AI\Platform\Message\UserMessage;
@@ -25,7 +23,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
-#[CoversClass(Chat::class)]
 final class ChatTest extends TestCase
 {
     public function testLoadMessagesReturnsDefaultSystemMessage()
