@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\MCP\Resources;
+namespace App\Mcp\Resources;
 
 use Mcp\Capability\Attribute\McpResource;
 

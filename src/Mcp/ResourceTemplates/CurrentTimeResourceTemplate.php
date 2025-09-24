@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\MCP\ResourceTemplates;
+namespace App\Mcp\ResourceTemplates;
 
 use Mcp\Capability\Attribute\McpResourceTemplate;
 

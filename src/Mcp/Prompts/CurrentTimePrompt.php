@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\MCP\Prompts;
+namespace App\Mcp\Prompts;
 
 use Mcp\Capability\Attribute\McpPrompt;
 
