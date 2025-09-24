@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\MCP\Tools;
+namespace App\Mcp\Tools;
 
 use Mcp\Capability\Attribute\McpTool;
 
