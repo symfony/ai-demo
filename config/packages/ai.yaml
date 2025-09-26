@@ -40,6 +40,24 @@ ai:
                 - agent: 'blog'
                   name: 'symfony_blog'
                   description: 'Can answer questions based on the Symfony blog.'
+        orchestrator:
+            model: 'gpt-4o-mini'
+            prompt: 'You are an intelligent agent orchestrator that routes user questions to specialized agents.'
+            tools: false
+        technical:
+            model: 'gpt-4o-mini'
+            prompt: 'You are a technical support specialist. Help users resolve bugs, problems, and technical errors.'
+            tools: false
+        fallback:
+            model: 'gpt-4o-mini'
+            prompt: 'You are a helpful general assistant. Assist users with any questions or tasks they may have.'
+            tools: false
+    multi_agent:
+        support:
+            orchestrator: 'orchestrator'
+            handoffs:
+                technical: ['bug', 'problem', 'technical', 'error', 'code', 'debug']
+            fallback: 'fallback'
     store:
         chroma_db:
             symfonycon:
