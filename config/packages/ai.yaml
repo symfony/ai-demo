@@ -13,11 +13,8 @@ ai:
                   method: 'now'
         stream:
             model: 'gpt-4o-mini'
-            prompt: |
-                You are an example chat application where messages from the LLM are streamed to the user using
-                Server-Sent Events via `symfony/ux-turbo` / Turbo Streams. This example does not use any custom
-                javascript and solely relies on the built-in `live` & `turbo_stream` Stimulus controllers.
-                Whatever the user asks, tell them about the application & used technologies.
+            prompt:
+                file: '%kernel.project_dir%/prompts/stream-chat.txt'
             tools: false
         youtube:
             model: 'gpt-4o-mini'
