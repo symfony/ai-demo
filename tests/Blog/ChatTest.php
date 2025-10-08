@@ -37,8 +37,8 @@ final class ChatTest extends TestCase
 
         $systemMessage = $messages->getMessages()[0];
         $this->assertInstanceOf(SystemMessage::class, $systemMessage);
-        $this->assertStringContainsString('helpful assistant', $systemMessage->content);
-        $this->assertStringContainsString('similarity_search', $systemMessage->content);
+        $this->assertStringContainsString('helpful assistant', $systemMessage->getContent());
+        $this->assertStringContainsString('similarity_search', $systemMessage->getContent());
     }
 
     public function testSubmitMessageAddsUserMessageAndAgentResponse()
@@ -65,12 +65,12 @@ final class ChatTest extends TestCase
         // Check user message
         $userMessage = $messageList[1];
         $this->assertInstanceOf(UserMessage::class, $userMessage);
-        $this->assertSame('What is Symfony?', $userMessage->content[0]->text);
+        $this->assertSame('What is Symfony?', $userMessage->getContent()[0]->getText());
 
         // Check assistant message
         $assistantMessage = $messageList[2];
         $this->assertInstanceOf(AssistantMessage::class, $assistantMessage);
-        $this->assertSame('Symfony is a PHP web framework for building web applications and APIs.', $assistantMessage->content);
+        $this->assertSame('Symfony is a PHP web framework for building web applications and APIs.', $assistantMessage->getContent());
     }
 
     public function testSubmitMessageWithUnknownQueryUsesDefaultResponse()
@@ -91,7 +91,7 @@ final class ChatTest extends TestCase
 
         // Check assistant used default response
         $assistantMessage = $messageList[2];
-        $this->assertSame('I can help you with Symfony-related questions!', $assistantMessage->content);
+        $this->assertSame('I can help you with Symfony-related questions!', $assistantMessage->getContent());
     }
 
     public function testMultipleMessagesAreTrackedCorrectly()
@@ -169,10 +169,10 @@ final class ChatTest extends TestCase
         $this->assertCount(5, $messages);
 
         // Verify the conversation flow (with 5 messages)
-        $this->assertStringContainsString('helpful assistant', $messages[0]->content); // system
-        $this->assertSame('What is Symfony?', $messages[1]->content[0]->text); // user1
-        $this->assertSame('Symfony is a PHP web framework for building web applications and APIs.', $messages[2]->content); // assistant1
-        $this->assertSame('Tell me more', $messages[3]->content[0]->text); // user2
+        $this->assertStringContainsString('helpful assistant', $messages[0]->getContent()); // system
+        $this->assertSame('What is Symfony?', $messages[1]->getContent()[0]->getText()); // user1
+        $this->assertSame('Symfony is a PHP web framework for building web applications and APIs.', $messages[2]->getContent()); // assistant1
+        $this->assertSame('Tell me more', $messages[3]->getContent()[0]->getText()); // user2
         // The 5th message appears to be the previous assistant response or another system message
     }
 
