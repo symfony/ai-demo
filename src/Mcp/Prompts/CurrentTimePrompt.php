@@ -15,6 +15,9 @@ use Mcp\Capability\Attribute\McpPrompt;
 
 class CurrentTimePrompt
 {
+    /**
+     * @return array{role: 'user', content: string}[]
+     */
     #[McpPrompt(name: 'time-analysis')]
     public function getTimeAnalysisPrompt(): array
     {

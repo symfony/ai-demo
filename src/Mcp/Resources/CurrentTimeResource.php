@@ -15,6 +15,9 @@ use Mcp\Capability\Attribute\McpResource;
 
 class CurrentTimeResource
 {
+    /**
+     * @return array{uri: string, mimeType: string, text: string}
+     */
     #[McpResource(uri: 'time://current', name: 'current-time-resource')]
     public function getCurrentTimeResource(): array
     {

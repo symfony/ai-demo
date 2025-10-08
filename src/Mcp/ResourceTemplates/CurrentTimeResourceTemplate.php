@@ -15,6 +15,9 @@ use Mcp\Capability\Attribute\McpResourceTemplate;
 
 class CurrentTimeResourceTemplate
 {
+    /**
+     * @return array{uri: string, mimeType: string, text: string}
+     */
     #[McpResourceTemplate(uriTemplate: 'time://{timezone}', name: 'time-by-timezone')]
     public function getTimeByTimezone(string $timezone): array
     {

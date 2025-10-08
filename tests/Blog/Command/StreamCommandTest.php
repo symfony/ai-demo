@@ -41,10 +41,12 @@ class StreamCommandTest extends TestCase
 
                 public function getMetadata(): Metadata
                 {
+                    return new Metadata();
                 }
 
                 public function getRawResult(): ?RawResultInterface
                 {
+                    return null;
                 }
 
                 public function setRawResult(RawResultInterface $rawResult): void

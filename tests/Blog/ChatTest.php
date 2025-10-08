@@ -15,6 +15,7 @@ use App\Blog\Chat;
 use PHPUnit\Framework\TestCase;
 use Symfony\AI\Agent\MockAgent;
 use Symfony\AI\Platform\Message\AssistantMessage;
+use Symfony\AI\Platform\Message\Content\Text;
 use Symfony\AI\Platform\Message\MessageBag;
 use Symfony\AI\Platform\Message\SystemMessage;
 use Symfony\AI\Platform\Message\UserMessage;
@@ -65,6 +66,7 @@ final class ChatTest extends TestCase
         // Check user message
         $userMessage = $messageList[1];
         $this->assertInstanceOf(UserMessage::class, $userMessage);
+        $this->assertInstanceOf(Text::class, $userMessage->getContent()[0]);
         $this->assertSame('What is Symfony?', $userMessage->getContent()[0]->getText());
 
         // Check assistant message
@@ -169,9 +171,16 @@ final class ChatTest extends TestCase
         $this->assertCount(5, $messages);
 
         // Verify the conversation flow (with 5 messages)
-        $this->assertStringContainsString('helpful assistant', $messages[0]->getContent()); // system
+        $this->assertInstanceOf(SystemMessage::class, $messages[0]);
+        $this->assertStringContainsString('helpful assistant', $messages[0]->getContent());
+        $this->assertInstanceOf(UserMessage::class, $messages[1]);
+        $this->assertCount(1, $messages[1]->getContent());
+        $this->assertInstanceOf(Text::class, $messages[1]->getContent()[0]);
         $this->assertSame('What is Symfony?', $messages[1]->getContent()[0]->getText()); // user1
         $this->assertSame('Symfony is a PHP web framework for building web applications and APIs.', $messages[2]->getContent()); // assistant1
+        $this->assertInstanceOf(UserMessage::class, $messages[3]);
+        $this->assertCount(1, $messages[3]->getContent());
+        $this->assertInstanceOf(Text::class, $messages[3]->getContent()[0]);
         $this->assertSame('Tell me more', $messages[3]->getContent()[0]->getText()); // user2
         // The 5th message appears to be the previous assistant response or another system message
     }
