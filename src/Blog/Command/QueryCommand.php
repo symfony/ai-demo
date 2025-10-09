@@ -47,7 +47,7 @@ final readonly class QueryCommand
 
         $vector = $this->vectorizer->vectorize($search);
         $queryResponse = $collection->query(
-            queryEmbeddings: [$vector->getData()], /** @phpstan-ignore-line until https://github.com/symfony/ai/issues/768 */
+            queryEmbeddings: [$vector->getData()], /* @phpstan-ignore-line until https://github.com/symfony/ai/issues/768 */
             nResults: 4,
         );
 
