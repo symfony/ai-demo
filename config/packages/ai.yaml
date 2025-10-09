@@ -25,10 +25,11 @@ ai:
                 options:
                     temperature: 0.5
             prompt:
-                text: 'Please answer the users question based on Wikipedia and provide a link to the article.'
+                text: 'Please answer the users question based on Wikipedia, only use information provided in the messages.'
                 include_tools: true
             tools:
                 - 'Symfony\AI\Agent\Toolbox\Tool\Wikipedia'
+            include_sources: true
         audio:
             model: 'gpt-4o-mini?temperature=1.0'
             prompt: 'You are a friendly chatbot that likes to have a conversation with users and asks them some questions.'
@@ -89,7 +90,7 @@ services:
 
     Symfony\AI\Store\Document\Loader\RssFeedLoader: ~
     Symfony\AI\Store\Document\Transformer\TextTrimTransformer: ~
-    
+
     app.filter.week_of_symfony:
         class: 'Symfony\AI\Store\Document\Filter\TextContainsFilter'
         arguments:
