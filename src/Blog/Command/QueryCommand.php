@@ -45,9 +45,9 @@ final readonly class QueryCommand
         $io->comment(\sprintf('Converting "%s" to vector & searching in Chroma DB ...', $search));
         $io->comment('Results are limited to 4 most similar documents.');
 
-        $vector = $this->vectorizer->vectorize($search);
+        $vector = $this->vectorizer->vectorize((string) $search);
         $queryResponse = $collection->query(
-            queryEmbeddings: [$vector->getData()], /* @phpstan-ignore-line until https://github.com/symfony/ai/issues/768 */
+            queryEmbeddings: [$vector->getData()],
             nResults: 4,
         );
 
