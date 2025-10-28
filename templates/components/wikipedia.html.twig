@@ -9,14 +9,14 @@
     <div id="chat-body" class="card-body p-4 overflow-auto">
         {% for message in this.messages %}
             {% include '_message.html.twig' with { message, latest: loop.last } %}
-            {% if message.metadata.has('sources') %}
-                <div class="ms-5">
-                    <h6>Sources:</h6>
-                    <ol>
-                        {% for source in message.metadata.get('sources') %}
-                            <li><a class="text-black-50" href="{{ source.reference }}" target="_blank" rel="noopener">{{ source.name }}</a></li>
-                        {% endfor %}
-                    </ol>
+            {% if message.metadata.has('sources') and 0 != message.metadata.get('sources')|length %}
+                <div class="ms-5 ps-4" style="margin-top: -1.5em;">
+                    <span class="text-muted">Sources:</span>
+                    {% for source in message.metadata.get('sources') %}
+                        <a class="text-black-50" href="{{ source.reference }}" target="_blank" rel="noopener">
+                            <span class="badge text-bg-secondary">{{ source.name }}</span>
+                        </a>
+                    {% endfor %}
                 </div>
             {% endif %}
         {% else %}
