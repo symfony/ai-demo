@@ -70,6 +70,7 @@ ai:
             filters:
                 - 'app.filter.week_of_symfony'
             transformers:
+                - 'Symfony\AI\Store\Document\Transformer\TextSplitTransformer'
                 - 'Symfony\AI\Store\Document\Transformer\TextTrimTransformer'
             vectorizer: 'ai.vectorizer.openai'
             store: 'ai.store.chroma_db.symfonycon'
@@ -89,6 +90,7 @@ services:
         $store: '@ai.store.chroma_db.symfonycon'
 
     Symfony\AI\Store\Document\Loader\RssFeedLoader: ~
+    Symfony\AI\Store\Document\Transformer\TextSplitTransformer: ~
     Symfony\AI\Store\Document\Transformer\TextTrimTransformer: ~
 
     app.filter.week_of_symfony:
