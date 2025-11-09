@@ -15,6 +15,7 @@ use Symfony\AI\Platform\Message\Content\Image;
 use Symfony\AI\Platform\Message\Message;
 use Symfony\AI\Platform\Message\MessageBag;
 use Symfony\AI\Platform\PlatformInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
@@ -30,6 +31,7 @@ final class TwigComponent
     public string $caption = 'Please define an instruction and hit submit.';
 
     public function __construct(
+        #[Autowire(service: 'ai.platform.openai')]
         private readonly PlatformInterface $platform,
     ) {
     }

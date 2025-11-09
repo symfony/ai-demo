@@ -25,6 +25,7 @@ final class Chat
     private const SESSION_KEY = 'audio-chat';
 
     public function __construct(
+        #[Autowire(service: 'ai.platform.openai')]
         private readonly PlatformInterface $platform,
         private readonly RequestStack $requestStack,
         #[Autowire(service: 'ai.agent.audio')]
