@@ -58,6 +58,6 @@ final readonly class Analyzer
             }
         }
 
-        return new RelevantArea((int) $xMin, (int)$yMin, (int)$xMax, (int)$yMax);
+        return new RelevantArea((int) $xMin, (int) $yMin, (int) $xMax, (int) $yMax);
     }
 }

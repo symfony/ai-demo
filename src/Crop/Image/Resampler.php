@@ -88,6 +88,6 @@ final readonly class Resampler
         imagedestroy($resampled);
         unlink($filePath);
 
-        return 'data:'.explode(';', explode(':', $imageData, 2)[1], 2)[0].';base64,'. base64_encode($imageContent);
+        return 'data:'.explode(';', explode(':', $imageData, 2)[1], 2)[0].';base64,'.base64_encode($imageContent);
     }
 }
