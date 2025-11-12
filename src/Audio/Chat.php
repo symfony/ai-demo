@@ -12,6 +12,7 @@
 namespace App\Audio;
 
 use Symfony\AI\Agent\AgentInterface;
+use Symfony\AI\Platform\Bridge\OpenAi\TextToSpeech\Voice;
 use Symfony\AI\Platform\Message\Content\Audio;
 use Symfony\AI\Platform\Message\Message;
 use Symfony\AI\Platform\Message\MessageBag;
@@ -58,7 +59,14 @@ final class Chat
 
         \assert($result instanceof TextResult);
 
-        $messages->add(Message::ofAssistant($result->getContent()));
+        $assistantMessage = Message::ofAssistant($result->getContent());
+        $messages->add($assistantMessage);
+
+        $result = $this->platform->invoke('tts-1', $result->getContent(), [
+            'voice' => Voice::CORAL,
+            'instructions' => 'Speak in a cheerful and positive tone.',
+        ]);
+        $assistantMessage->getMetadata()->add('audio', $result->asDataUri('audio/mpeg'));
 
         $this->saveMessages($messages);
     }
