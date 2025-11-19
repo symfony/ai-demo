@@ -24,6 +24,12 @@ ai:
             platform: 'ai.platform.openai'
             model: 'gpt-4o-mini'
             tools: false
+        recipe:
+            platform: 'ai.platform.openai'
+            model: 'gpt-4o-mini'
+            prompt:
+                text: 'You are a helpful cooking assistant. Provide detailed recipes based on user requests.'
+            tools: false
         wikipedia:
             platform: 'ai.platform.openai'
             model:
@@ -52,6 +58,7 @@ ai:
                   description: |
                       Subagent, that can answer questions about latest news around the Symfony Framework, like latest
                       features, events or community news.
+        # Multi-agent setup
         orchestrator:
             platform: 'ai.platform.openai'
             model: 'gpt-4o-mini'
