@@ -107,7 +107,7 @@ services:
 
     # Symfony\AI\Agent\Toolbox\Tool\Clock: ~
     # Symfony\AI\Agent\Bridge\OpenMeteo\OpenMeteo: ~
-    # Symfony\AI\Agent\Toolbox\Tool\SerpApi:
+    # Symfony\AI\Agent\Bridge\SerpApi\SerpApi:
     #     $apiKey: '%env(SERP_API_KEY)%'
     Symfony\AI\Agent\Toolbox\Tool\Wikipedia: ~
     Symfony\AI\Agent\Toolbox\Tool\SimilaritySearch:
