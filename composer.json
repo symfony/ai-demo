@@ -14,8 +14,6 @@
         "php-http/discovery": "^1.20",
         "runtime/frankenphp-symfony": "^0.2.0",
         "symfony/ai-bundle": "@dev",
-        "symfony/ai-open-meteo-tool": "@dev",
-        "symfony/ai-serp-api-tool": "@dev",
         "symfony/asset": "~7.3.0",
         "symfony/asset-mapper": "~7.3.0",
         "symfony/clock": "~7.3.0",
