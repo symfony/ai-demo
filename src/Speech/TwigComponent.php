@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Audio;
+namespace App\Speech;
 
 use Symfony\AI\Platform\Message\MessageInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -17,7 +17,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
-#[AsLiveComponent('audio')]
+#[AsLiveComponent('speech')]
 final class TwigComponent
 {
     use DefaultActionTrait;

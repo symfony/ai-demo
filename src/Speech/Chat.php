@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Audio;
+namespace App\Speech;
 
 use Symfony\AI\Agent\AgentInterface;
 use Symfony\AI\Platform\Bridge\OpenAi\TextToSpeech\Voice;
@@ -29,7 +29,7 @@ final class Chat
         #[Autowire(service: 'ai.platform.openai')]
         private readonly PlatformInterface $platform,
         private readonly RequestStack $requestStack,
-        #[Autowire(service: 'ai.agent.audio')]
+        #[Autowire(service: 'ai.agent.speech')]
         private readonly AgentInterface $agent,
     ) {
     }
@@ -66,7 +66,7 @@ final class Chat
             'voice' => Voice::CORAL,
             'instructions' => 'Speak in a cheerful and positive tone.',
         ]);
-        $assistantMessage->getMetadata()->add('audio', $result->asDataUri('audio/mpeg'));
+        $assistantMessage->getMetadata()->add('speech', $result->asDataUri('audio/mpeg'));
 
         $this->saveMessages($messages);
     }

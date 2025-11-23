@@ -92,20 +92,20 @@
         </div>
         <div class="row mt-4">
             <div class="col-md-3">
-                <div class="card audio bg-body shadow-sm">
+                <div class="card speech bg-body shadow-sm">
                     <div class="card-img-top py-2">
                         {{ ux_icon('iconoir:microphone-solid', { height: '150px', width: '150px' }) }}
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Audio Bot + Subagent</h5>
+                        <h5 class="card-title">Speech Bot + Subagent</h5>
                         <p class="card-text">Demonstration of speech-to-text & text-to-speech and a subagent, combining 4 models in total.</p>
-                        <a href="{{ path('audio') }}" class="btn btn-outline-dark d-block">Try Audio Bot</a>
+                        <a href="{{ path('speech') }}" class="btn btn-outline-dark d-block">Try Speech Bot</a>
                     </div>
                     {# Profiler route only available in dev #}
                     {% if 'dev' == app.environment %}
                         <div class="card-footer">
                             {{ ux_icon('solar:code-linear', { height: '20px', width: '20px' }) }}
-                            <a href="{{ path('_profiler_open_file', { file: 'src/Audio/Chat.php', line: 25 }) }}">See Implementation</a>
+                            <a href="{{ path('_profiler_open_file', { file: 'src/Speech/Chat.php', line: 25 }) }}">See Implementation</a>
                         </div>
                     {% endif %}
                 </div>

@@ -42,7 +42,7 @@ ai:
             tools:
                 - 'Symfony\AI\Agent\Toolbox\Tool\Wikipedia'
             include_sources: true
-        audio:
+        speech:
             platform: 'ai.platform.openai'
             model: 'gpt-4o-mini?temperature=1.0'
             prompt: |
@@ -52,6 +52,7 @@ ai:
                 If you don't know the answer, say so. Keep in mind that you are in a spoken conversation, so keep your
                 answers concise and to the point. They will be read out loud to the user.
             tools:
+                - 'Symfony\AI\Agent\Toolbox\Tool\Clock'
                 # Agent in agent 🤯
                 - agent: 'blog'
                   name: 'symfony_blog'
@@ -105,7 +106,7 @@ services:
         autowire: true
         autoconfigure: true
 
-    # Symfony\AI\Agent\Toolbox\Tool\Clock: ~
+    Symfony\AI\Agent\Toolbox\Tool\Clock: ~
     Symfony\AI\Agent\Toolbox\Tool\Wikipedia: ~
     Symfony\AI\Agent\Toolbox\Tool\SimilaritySearch:
         $vectorizer: '@ai.vectorizer.openai'
