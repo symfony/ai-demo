@@ -9,7 +9,7 @@ ai:
             platform: 'ai.platform.openai'
             model: 'gpt-4o-mini'
             tools:
-                - 'Symfony\AI\Agent\Toolbox\Tool\SimilaritySearch'
+                - 'Symfony\AI\Agent\Bridge\SimilaritySearch\SimilaritySearch'
                 - service: 'clock'
                   name: 'clock'
                   description: 'Provides the current date and time.'
@@ -40,7 +40,7 @@ ai:
                 text: 'Please answer the users question based on Wikipedia, only use information provided in the messages.'
                 include_tools: true
             tools:
-                - 'Symfony\AI\Agent\Toolbox\Tool\Wikipedia'
+                - 'Symfony\AI\Agent\Bridge\Wikipedia\Wikipedia'
             include_sources: true
         speech:
             platform: 'ai.platform.openai'
@@ -52,7 +52,7 @@ ai:
                 If you don't know the answer, say so. Keep in mind that you are in a spoken conversation, so keep your
                 answers concise and to the point. They will be read out loud to the user.
             tools:
-                - 'Symfony\AI\Agent\Toolbox\Tool\Clock'
+                - 'Symfony\AI\Agent\Bridge\Clock\Clock'
                 # Agent in agent 🤯
                 - agent: 'blog'
                   name: 'symfony_blog'
@@ -106,9 +106,11 @@ services:
         autowire: true
         autoconfigure: true
 
-    Symfony\AI\Agent\Toolbox\Tool\Clock: ~
-    Symfony\AI\Agent\Toolbox\Tool\Wikipedia: ~
-    Symfony\AI\Agent\Toolbox\Tool\SimilaritySearch:
+    # TODO: Remove once flex recipe works correctly
+    Symfony\AI\Agent\Bridge\Clock\Clock: ~
+    Symfony\AI\Agent\Bridge\Wikipedia\Wikipedia: ~
+
+    Symfony\AI\Agent\Bridge\SimilaritySearch\SimilaritySearch:
         $vectorizer: '@ai.vectorizer.openai'
         $store: '@ai.store.chroma_db.symfonycon'
 
