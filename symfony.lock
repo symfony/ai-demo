@@ -67,7 +67,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "main",
             "version": "0.1",
-            "ref": "c8da024bc06438f321f35296ef9ed6c2235bfa33"
+            "ref": "db3f1c8c57991c8ded8c1b165e3b73b99cd20008"
         },
         "files": [
             "config/packages/ai.yaml"
