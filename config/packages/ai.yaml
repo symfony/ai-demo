@@ -106,10 +106,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    # TODO: Remove once flex recipe works correctly
-    Symfony\AI\Agent\Bridge\Clock\Clock: ~
-    Symfony\AI\Agent\Bridge\Wikipedia\Wikipedia: ~
-
     Symfony\AI\Agent\Bridge\SimilaritySearch\SimilaritySearch:
         $vectorizer: '@ai.vectorizer.openai'
         $store: '@ai.store.chroma_db.symfonycon'
