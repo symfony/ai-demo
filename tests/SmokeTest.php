@@ -48,7 +48,8 @@ final class SmokeTest extends WebTestCase
     public static function provideChats(): iterable
     {
         yield 'Blog' => ['/blog', 'Retrieval Augmented Generation based on the Symfony blog'];
-        yield 'YouTube' => ['/youtube', 'Chat about a YouTube Video'];
+        yield 'Recipe' => ['/recipe', 'Cooking Recipes'];
         yield 'Wikipedia' => ['/wikipedia', 'Wikipedia Research'];
+        yield 'YouTube' => ['/youtube', 'Chat about a YouTube Video'];
     }
 }
