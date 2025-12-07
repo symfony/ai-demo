@@ -82,7 +82,7 @@ ai:
                 technical: ['bug', 'problem', 'technical', 'error', 'code', 'debug']
             fallback: 'fallback'
     store:
-        chroma_db:
+        chromadb:
             symfonycon:
                 collection: 'symfony_blog'
     vectorizer:
@@ -99,11 +99,11 @@ ai:
                 - 'Symfony\AI\Store\Document\Transformer\TextSplitTransformer'
                 - 'Symfony\AI\Store\Document\Transformer\TextTrimTransformer'
             vectorizer: 'ai.vectorizer.openai'
-            store: 'ai.store.chroma_db.symfonycon'
+            store: 'ai.store.chromadb.symfonycon'
     retriever:
         blog:
             vectorizer: 'ai.vectorizer.openai'
-            store: 'ai.store.chroma_db.symfonycon'
+            store: 'ai.store.chromadb.symfonycon'
 
 services:
     _defaults:
@@ -112,7 +112,7 @@ services:
 
     Symfony\AI\Agent\Bridge\SimilaritySearch\SimilaritySearch:
         $vectorizer: '@ai.vectorizer.openai'
-        $store: '@ai.store.chroma_db.symfonycon'
+        $store: '@ai.store.chromadb.symfonycon'
 
     Symfony\AI\Store\Document\Loader\RssFeedLoader: ~
     Symfony\AI\Store\Document\Transformer\TextSplitTransformer: ~
