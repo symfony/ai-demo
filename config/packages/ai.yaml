@@ -1,13 +1,18 @@
 ai:
     platform:
         openai:
-            api_key: '%env(OPENAI_API_KEY)%'
+            api_key: '%env(OPENAI_API_KEY)%'       # kept for Speech STT/TTS only
         huggingface:
             api_key: '%env(HUGGINGFACE_API_KEY)%'
+        generic:
+            amazeeai:
+                base_url: '%env(AMAZEEAI_LLM_API_URL)%'
+                api_key: '%env(AMAZEEAI_LLM_KEY)%'
+                model_catalog: 'app.amazeeai_model_catalog'
     agent:
         blog:
-            platform: 'ai.platform.openai'
-            model: 'gpt-5-mini'
+            platform: 'ai.platform.generic.amazeeai'
+            model: 'claude-3-5-sonnet'
             tools:
                 - 'Symfony\AI\Agent\Bridge\SimilaritySearch\SimilaritySearch'
                 - service: 'clock'
@@ -17,25 +22,25 @@ ai:
             memory:
                 service: 'App\Blog\SymfonyVersionsMemory'
         stream:
-            platform: 'ai.platform.openai'
-            model: 'gpt-5-mini'
+            platform: 'ai.platform.generic.amazeeai'
+            model: 'claude-3-5-haiku'
             prompt:
                 file: '%kernel.project_dir%/prompts/stream-chat.txt'
             tools: false
         youtube:
-            platform: 'ai.platform.openai'
-            model: 'gpt-5-mini'
+            platform: 'ai.platform.generic.amazeeai'
+            model: 'claude-3-5-sonnet'
             tools: false
         recipe:
-            platform: 'ai.platform.openai'
-            model: 'gpt-5-mini'
+            platform: 'ai.platform.generic.amazeeai'
+            model: 'claude-3-5-sonnet'
             prompt:
                 text: 'You are a helpful cooking assistant. Provide detailed recipes based on user requests.'
             tools: false
         wikipedia:
-            platform: 'ai.platform.openai'
+            platform: 'ai.platform.generic.amazeeai'
             model:
-                name: 'gpt-5-mini'
+                name: 'claude-3-5-sonnet'
                 options:
                     temperature: 0.5
             prompt:
@@ -45,8 +50,8 @@ ai:
                 - 'Symfony\AI\Agent\Bridge\Wikipedia\Wikipedia'
             include_sources: true
         speech:
-            platform: 'ai.platform.openai'
-            model: 'gpt-5-mini?temperature=1.0'
+            platform: 'ai.platform.generic.amazeeai'
+            model: 'claude-3-5-sonnet?temperature=1.0'
             prompt: |
                 You are a friendly, positive and energetic voice assistant. You can engage in light discussions, ask
                 questions, and do general small-talk. If asked about the Symfony Framework or their community events,
@@ -63,18 +68,18 @@ ai:
                       features, events or community news.
         # Multi-agent setup
         orchestrator:
-            platform: 'ai.platform.openai'
-            model: 'gpt-5-mini'
+            platform: 'ai.platform.generic.amazeeai'
+            model: 'claude-3-5-haiku'
             prompt: 'You are an intelligent agent orchestrator that routes user questions to specialized agents.'
             tools: false
         technical:
-            platform: 'ai.platform.openai'
-            model: 'gpt-5-mini'
+            platform: 'ai.platform.generic.amazeeai'
+            model: 'claude-3-5-sonnet'
             prompt: 'You are a technical support specialist. Help users resolve bugs, problems, and technical errors.'
             tools: false
         fallback:
-            platform: 'ai.platform.openai'
-            model: 'gpt-5-mini'
+            platform: 'ai.platform.generic.amazeeai'
+            model: 'claude-3-5-haiku'
             prompt: 'You are a helpful general assistant. Assist users with any questions or tasks they may have.'
             tools: false
     multi_agent:
@@ -84,13 +89,18 @@ ai:
                 technical: ['bug', 'problem', 'technical', 'error', 'code', 'debug']
             fallback: 'fallback'
     store:
-        chromadb:
+        postgres:
             symfonycon:
-                collection: 'symfony_blog'
+                dsn: '%env(AMAZEEAI_VDB_DSN)%'
+                username: '%env(AMAZEEAI_VDB_USER)%'
+                password: '%env(AMAZEEAI_VDB_PASSWORD)%'
+                table_name: 'symfony_blog'
+                vector_field: 'embedding'
+                distance: 'cosine'
     vectorizer:
-        openai:
-            platform: 'ai.platform.openai'
-            model: 'text-embedding-ada-002'
+        amazeeai:
+            platform: 'ai.platform.generic.amazeeai'
+            model: 'titan-embed-text-v2:0'
     indexer:
         blog:
             loader: 'Symfony\AI\Store\Document\Loader\RssFeedLoader'
@@ -100,21 +110,28 @@ ai:
             transformers:
                 - 'Symfony\AI\Store\Document\Transformer\TextSplitTransformer'
                 - 'Symfony\AI\Store\Document\Transformer\TextTrimTransformer'
-            vectorizer: 'ai.vectorizer.openai'
-            store: 'ai.store.chromadb.symfonycon'
+            vectorizer: 'ai.vectorizer.amazeeai'
+            store: 'ai.store.postgres.symfonycon'
     retriever:
         blog:
-            vectorizer: 'ai.vectorizer.openai'
-            store: 'ai.store.chromadb.symfonycon'
+            vectorizer: 'ai.vectorizer.amazeeai'
+            store: 'ai.store.postgres.symfonycon'
 
 services:
     _defaults:
         autowire: true
         autoconfigure: true
 
+    app.amazeeai_model_catalog:
+        class: 'App\Platform\AmazeeAiModelCatalog'
+        arguments:
+            $httpClient: '@http_client'
+            $baseUrl: '%env(AMAZEEAI_LLM_API_URL)%'
+            $apiKey: '%env(AMAZEEAI_LLM_KEY)%'
+
     Symfony\AI\Agent\Bridge\SimilaritySearch\SimilaritySearch:
-        $vectorizer: '@ai.vectorizer.openai'
-        $store: '@ai.store.chromadb.symfonycon'
+        $vectorizer: '@ai.vectorizer.amazeeai'
+        $store: '@ai.store.postgres.symfonycon'
 
     Symfony\AI\Store\Document\Loader\RssFeedLoader: ~
     Symfony\AI\Store\Document\Transformer\TextSplitTransformer: ~

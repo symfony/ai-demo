@@ -11,12 +11,31 @@
 
 namespace App;
 
+use App\Platform\AmazeeAiPlatformFactory;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
 class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
+
+    protected function build(ContainerBuilder $container): void
+    {
+        // Replace the generic platform factory to use a ResultConverter that
+        // handles LiteLLM returning finish_reason "tool_calls" for structured output.
+        $container->addCompilerPass(new class() implements \Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface {
+            public function process(ContainerBuilder $container): void
+            {
+                if (!$container->hasDefinition('ai.platform.generic.amazeeai')) {
+                    return;
+                }
+
+                $container->getDefinition('ai.platform.generic.amazeeai')
+                    ->setFactory([AmazeeAiPlatformFactory::class, 'create']);
+            }
+        });
+    }
 
     /**
      * @return array<string, array<mixed>|bool|string|int|float|\UnitEnum|null>

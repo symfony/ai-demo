@@ -31,7 +31,7 @@ final readonly class StreamCommand
         $io->title('Stream Example Command');
         $io->text('This command demonstrates streaming output in the console.');
 
-        $io->comment('Make sure to have ChromaDB running and the blog indexed, see README.');
+        $io->comment('Make sure to have the PostgreSQL vector database running and the blog indexed, see README.');
         $io->comment('You can use -vvv or --profile to get more insights into the execution.');
 
         $question = $io->ask(

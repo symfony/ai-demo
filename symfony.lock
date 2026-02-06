@@ -76,18 +76,6 @@
             "config/packages/ai.yaml"
         ]
     },
-    "symfony/ai-chroma-db-store": {
-        "version": "0.1",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "0.1",
-            "ref": "70b5179ede32bb6faf93f7f521570d3740f5230e"
-        },
-        "files": [
-            "config/packages/ai_chroma_db_store.yaml"
-        ]
-    },
     "symfony/ai-clock-tool": {
         "version": "0.9999999",
         "recipe": {
@@ -98,6 +86,18 @@
         },
         "files": [
             "config/packages/ai_clock_tool.yaml"
+        ]
+    },
+    "symfony/ai-generic-platform": {
+        "version": "0.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "0.1",
+            "ref": "caf14516010eb8e0c284f1264322b2af6a012723"
+        },
+        "files": [
+            "config/packages/ai_generic_platform.yaml"
         ]
     },
     "symfony/ai-hugging-face-platform": {
@@ -122,6 +122,18 @@
         },
         "files": [
             "config/packages/ai_open_ai_platform.yaml"
+        ]
+    },
+    "symfony/ai-postgres-store": {
+        "version": "0.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "0.1",
+            "ref": "373cb1506ee0d7082944bb2077adce7edcc23229"
+        },
+        "files": [
+            "config/packages/ai_postgres_store.yaml"
         ]
     },
     "symfony/ai-wikipedia-tool": {

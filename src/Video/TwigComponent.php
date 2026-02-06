@@ -36,7 +36,7 @@ final class TwigComponent
     public ?string $image = null;
 
     public function __construct(
-        #[Autowire(service: 'ai.platform.openai')]
+        #[Autowire(service: 'ai.platform.generic.amazeeai')]
         private readonly PlatformInterface $platform,
     ) {
     }
@@ -59,7 +59,7 @@ final class TwigComponent
             Message::ofUser($this->instruction, Image::fromDataUrl($this->image))
         );
 
-        $result = $this->platform->invoke('gpt-5-mini', $messageBag, [
+        $result = $this->platform->invoke('claude-3-5-sonnet', $messageBag, [
             'max_output_tokens' => 100,
         ]);
 
