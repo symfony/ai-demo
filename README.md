@@ -1,6 +1,27 @@
-# Symfony AI - Demo Application
+# Symfony AI - Demo Application using amazee.ai
 
-Symfony application demoing Symfony AI components.
+Symfony application demoing Symfony AI components with the amazee.ai VDB and LLM providers.
+
+## Quick start
+
+Install dependencies
+
+```bash
+composer install
+```
+
+Require amazee.ai credentials,
+this will populate the environment variables.
+
+```bash
+php bin/console ai:amazee:configure user@example.com
+```
+
+Start the server
+
+```bash
+symfony serve -d
+```
 
 ## Examples
 
@@ -13,9 +34,8 @@ What you need to run this demo:
 * Internet Connection
 * Terminal & Browser
 * [Git](https://git-scm.com/) & [GitHub Account](https://github.com)
-* [Docker](https://www.docker.com/) with [Docker Compose Plugin](https://docs.docker.com/compose/)
 * Your Favorite IDE or Editor
-* An [OpenAI API Key](https://platform.openai.com/docs/api-reference/create-and-export-an-api-key)
+* Optional: an [OpenAI API Key](https://platform.openai.com/docs/api-reference/create-and-export-an-api-key) - for Speech STT/TTS only
 
 ## Technology
 
@@ -24,8 +44,8 @@ This small demo sits on top of following technologies:
 * [PHP >= 8.4](https://www.php.net/releases/8.4/en.php)
 * [Symfony 7.3 incl. Twig, Asset Mapper & UX](https://symfony.com/)
 * [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+* [amazee.ai](https://amazee.ai/)
 * [OpenAI's GPT & Embeddings](https://platform.openai.com/docs/overview)
-* [ChromaDB Vector Store](https://www.trychroma.com/)
 * [FrankenPHP](https://frankenphp.dev/)
 
 ## Setup
@@ -40,7 +60,6 @@ Checkout the repository, start the docker environment and install dependencies:
 git clone git@github.com:symfony/ai-demo.git
 cd ai-demo
 composer install
-docker compose up -d
 symfony serve -d
 ```
 
@@ -51,6 +70,8 @@ and the chatbot UI should be available for you to start chatting.
 > You might have to bypass the security warning of your browser with regard to self-signed certificates.
 
 ### 2. OpenAI Configuration
+
+**Optional** for speech 
 
 For using GPT and embedding models from OpenAI, you need to configure an OpenAI API key as environment variable.
 This requires you to have an OpenAI account, create a valid API key and set it as `OPENAI_API_KEY` in `.env.local` file.
@@ -67,11 +88,9 @@ symfony console debug:dotenv
 
 You should be able to see the `OPENAI_API_KEY` in the list of environment variables.
 
-### 3. Chroma DB Initialization
+### 3. PostgreSQL Initialization
 
-The [Chroma DB](https://www.trychroma.com/) is a vector store that is used to store embeddings of the chatbot's context.
-
-To initialize the Chroma DB, you need to run the following command:
+To initialize the vector DB, you need to run the following command:
 
 ```shell
 symfony console ai:store:index blog -vv
