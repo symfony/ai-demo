@@ -4,8 +4,73 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5233a697723a35b9dd1b7942816a33b",
+    "content-hash": "e5478dcc2c1fec54a659538f0f2d4b22",
     "packages": [
+        {
+            "name": "amazeeio/symfony-amazeeai-configure",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amazeeio-solutions/symfony-amazeeai-configure.git",
+                "reference": "906d99e09cd62e79b0aec1c51889d77e6ee36e36"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amazeeio-solutions/symfony-amazeeai-configure/zipball/906d99e09cd62e79b0aec1c51889d77e6ee36e36",
+                "reference": "906d99e09cd62e79b0aec1c51889d77e6ee36e36",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4",
+                "symfony/config": "^8.0",
+                "symfony/console": "^8.0",
+                "symfony/dependency-injection": "^8.0",
+                "symfony/http-client": "^8.0",
+                "symfony/http-kernel": "^8.0",
+                "symfony/process": "^8.0"
+            },
+            "require-dev": {
+                "captainhook/captainhook": "^5.23",
+                "captainhook/plugin-composer": "^5.3",
+                "friendsofphp/php-cs-fixer": "^3.93",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpstan/phpstan-symfony": "^2.0",
+                "phpunit/phpunit": "^12.5",
+                "spatie/ray": "^1.45",
+                "symfony/dotenv": "^8.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "AmazeeIo\\AmazeeAiConfigure\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "AmazeeIo\\AmazeeAiConfigure\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Jossart",
+                    "email": "christophe.jossart@amazee.io"
+                }
+            ],
+            "description": "Symfony command to configure the amazee.ai provider via email-based authentication.",
+            "keywords": [
+                "ai",
+                "amazee.io"
+            ],
+            "support": {
+                "source": "https://github.com/amazeeio-solutions/symfony-amazeeai-configure/tree/0.0.1",
+                "issues": "https://github.com/amazeeio-solutions/symfony-amazeeai-configure/issues"
+            },
+            "time": "2026-02-06T11:41:22+00:00"
+        },
         {
             "name": "codewithkyrian/chromadb-php",
             "version": "1.0.0",
@@ -5742,6 +5807,71 @@
                 }
             ],
             "time": "2024-09-09T11:45:10+00:00"
+        },
+        {
+            "name": "symfony/process",
+            "version": "v8.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "b5f3aa6762e33fd95efbaa2ec4f4bc9fdd16d674"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/b5f3aa6762e33fd95efbaa2ec4f4bc9fdd16d674",
+                "reference": "b5f3aa6762e33fd95efbaa2ec4f4bc9fdd16d674",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Executes commands in sub-processes",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/process/tree/v8.0.5"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-01-26T15:08:38+00:00"
         },
         {
             "name": "symfony/property-access",

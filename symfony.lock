@@ -1,4 +1,7 @@
 {
+    "amazeeio/symfony-amazeeai-configure": {
+        "version": "0.0.1"
+    },
     "doctrine/deprecations": {
         "version": "1.1",
         "recipe": {

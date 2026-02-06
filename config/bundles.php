@@ -16,4 +16,5 @@ return [
     Symfony\UX\TwigComponent\TwigComponentBundle::class => ['all' => true],
     Symfony\UX\Typed\TypedBundle::class => ['all' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
+    AmazeeIo\AmazeeAiConfigure\AmazeeAiConfigureBundle::class => ['all' => true],
 ];
