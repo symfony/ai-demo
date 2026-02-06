@@ -28,3 +28,5 @@ phpstan.neon
 
 chromadb
 coverage
+
+/*.idea
