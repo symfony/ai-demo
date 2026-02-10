@@ -1,11 +1,19 @@
 <?php
 
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
-namespace App\Platform;
+namespace Symfony\AI\Platform\Bridge\AmazeeAi;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Symfony\AI\Platform\Bridge\Generic\CompletionsModel;
 use Symfony\AI\Platform\Bridge\Generic\Embeddings;
 use Symfony\AI\Platform\Contract;
 use Symfony\AI\Platform\ModelCatalog\FallbackModelCatalog;
@@ -15,14 +23,17 @@ use Symfony\Component\HttpClient\EventSourceHttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
- * Platform factory that uses FixedCompletionsResultConverter to handle
- * LiteLLM returning finish_reason "tool_calls" for structured output.
+ * Platform factory for amazee.ai's LiteLLM proxy.
+ *
+ * Uses a custom CompletionsResultConverter that handles LiteLLM returning
+ * finish_reason "tool_calls" for structured output responses where the
+ * content is in message.content instead of message.tool_calls.
  */
-class AmazeeAiPlatformFactory
+class PlatformFactory
 {
     public static function create(
         string $baseUrl,
-        ?string $apiKey = null,
+        #[\SensitiveParameter] ?string $apiKey = null,
         ?HttpClientInterface $httpClient = null,
         ModelCatalogInterface $modelCatalog = new FallbackModelCatalog(),
         ?Contract $contract = null,
@@ -38,7 +49,7 @@ class AmazeeAiPlatformFactory
         $resultConverters = [];
         if ($supportsCompletions) {
             $modelClients[] = new \Symfony\AI\Platform\Bridge\Generic\Completions\ModelClient($httpClient, $baseUrl, $apiKey, $completionsPath);
-            $resultConverters[] = new FixedCompletionsResultConverter();
+            $resultConverters[] = new CompletionsResultConverter();
         }
         if ($supportsEmbeddings) {
             $modelClients[] = new Embeddings\ModelClient($httpClient, $baseUrl, $apiKey, $embeddingsPath);

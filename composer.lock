@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "97390b2aaa23ce2216e74f5b2535d2b5",
+    "content-hash": "67aa7f6c21df4f77a84c3e26204560fd",
     "packages": [
         {
             "name": "amazeeio/symfony-amazeeai-configure",
@@ -1972,6 +1972,59 @@
                 }
             ],
             "time": "2026-01-23T21:29:55+00:00"
+        },
+        {
+            "name": "symfony/ai-amazee-ai-platform",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "lib/amazeeai-bridge",
+                "reference": "3a7a4eed48ba471803273dc6a6177a620175713a"
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/ai-generic-platform": "^0.3",
+                "symfony/ai-platform": "^0.3",
+                "symfony/http-client": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^12.1"
+            },
+            "type": "symfony-ai-platform",
+            "extra": {
+                "thanks": {
+                    "name": "symfony/ai",
+                    "url": "https://github.com/symfony/ai"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\AI\\Platform\\Bridge\\AmazeeAi\\": ""
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Symfony\\AI\\Platform\\Bridge\\AmazeeAi\\Tests\\": "Tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "amazee.ai LiteLLM platform bridge for Symfony AI",
+            "keywords": [
+                "ai",
+                "amazeeai",
+                "bridge",
+                "litellm",
+                "platform"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "symfony/ai-bundle",
@@ -10712,7 +10765,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "symfony/ai-amazee-ai-platform": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

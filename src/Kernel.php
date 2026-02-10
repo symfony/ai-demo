@@ -11,7 +11,7 @@
 
 namespace App;
 
-use App\Platform\AmazeeAiPlatformFactory;
+use Symfony\AI\Platform\Bridge\AmazeeAi\PlatformFactory as AmazeeAiPlatformFactory;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;

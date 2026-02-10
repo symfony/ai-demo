@@ -1,0 +1,10 @@
+parameters:
+    level: 8
+    paths:
+        - .
+    excludePaths:
+        - Tests
+        - vendor
+    ignoreErrors:
+        -
+            message: "#^Method .*::test.*\\(\\) has no return type specified\\.$#"

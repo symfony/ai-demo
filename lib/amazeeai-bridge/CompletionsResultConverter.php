@@ -1,8 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
-namespace App\Platform;
+namespace Symfony\AI\Platform\Bridge\AmazeeAi;
 
 use Symfony\AI\Platform\Bridge\Generic\CompletionsModel;
 use Symfony\AI\Platform\Exception\AuthenticationException;
@@ -24,11 +33,14 @@ use Symfony\AI\Platform\TokenUsage\TokenUsageExtractorInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
- * Completions ResultConverter that handles LiteLLM returning
- * finish_reason "tool_calls" for structured output responses
- * where the content is in message.content instead of message.tool_calls.
+ * Completions ResultConverter for amazee.ai's LiteLLM proxy.
+ *
+ * LiteLLM may return finish_reason "tool_calls" for structured output
+ * responses but place the content in message.content instead of
+ * message.tool_calls. This converter handles that quirk by checking
+ * for tool_calls first and falling back to message.content as TextResult.
  */
-class FixedCompletionsResultConverter implements ResultConverterInterface
+class CompletionsResultConverter implements ResultConverterInterface
 {
     public function supports(Model $model): bool
     {
@@ -146,17 +158,21 @@ class FixedCompletionsResultConverter implements ResultConverterInterface
     }
 
     /**
+     * Converts a choice, handling LiteLLM's quirk where finish_reason is
+     * "tool_calls" but the actual content is in message.content (structured output)
+     * instead of message.tool_calls.
+     *
      * @param array<string, mixed> $choice
      */
     private function convertChoice(array $choice): ToolCallResult|TextResult
     {
         if ('tool_calls' === $choice['finish_reason']) {
-            // LiteLLM may return finish_reason "tool_calls" for structured output
-            // but place the content in message.content instead of message.tool_calls
             if (isset($choice['message']['tool_calls'])) {
                 return new ToolCallResult(...array_map([$this, 'convertToolCall'], $choice['message']['tool_calls']));
             }
 
+            // LiteLLM structured output: finish_reason is "tool_calls" but
+            // content is in message.content instead of message.tool_calls
             if (isset($choice['message']['content'])) {
                 return new TextResult($choice['message']['content']);
             }
