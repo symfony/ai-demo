@@ -42,7 +42,7 @@ final class ModelApiCatalog extends AbstractModelCatalog
 
     public function getModel(string $modelName): Model
     {
-        $this->ensureModelsLoaded();
+        $this->preloadRemoteModels();
 
         return parent::getModel($modelName);
     }
@@ -52,28 +52,33 @@ final class ModelApiCatalog extends AbstractModelCatalog
      */
     public function getModels(): array
     {
-        $this->ensureModelsLoaded();
+        $this->preloadRemoteModels();
 
         return parent::getModels();
     }
 
-    private function ensureModelsLoaded(): void
+    private function preloadRemoteModels(): void
     {
         if ($this->modelsAreLoaded) {
             return;
         }
 
         $this->modelsAreLoaded = true;
+        $this->models = [...$this->models, ...$this->fetchRemoteModels()];
+    }
 
+    /**
+     * @return iterable<string, array{class: class-string<Model>, capabilities: list<Capability>}>
+     */
+    private function fetchRemoteModels(): iterable
+    {
         $response = $this->httpClient->request('GET', $this->baseUrl.'/model/info', [
             'headers' => array_filter([
                 'Authorization' => $this->apiKey ? 'Bearer '.$this->apiKey : null,
             ]),
         ]);
 
-        $data = $response->toArray();
-
-        foreach ($data['data'] ?? [] as $modelInfo) {
+        foreach ($response->toArray()['data'] ?? [] as $modelInfo) {
             $name = $modelInfo['model_name'] ?? null;
             if (null === $name) {
                 continue;
@@ -83,12 +88,12 @@ final class ModelApiCatalog extends AbstractModelCatalog
             $mode = $info['mode'] ?? null;
 
             if ('embedding' === $mode) {
-                $this->models[$name] = [
+                yield $name => [
                     'class' => EmbeddingsModel::class,
                     'capabilities' => $this->buildEmbeddingCapabilities($info),
                 ];
             } else {
-                $this->models[$name] = [
+                yield $name => [
                     'class' => CompletionsModel::class,
                     'capabilities' => $this->buildCompletionsCapabilities($info),
                 ];

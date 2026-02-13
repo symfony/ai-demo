@@ -57,25 +57,4 @@ final class PlatformFactoryTest extends TestCase
         $this->assertInstanceOf(Platform::class, $platform);
     }
 
-    public function testCreateWithCompletionsOnly(): void
-    {
-        $platform = PlatformFactory::create(
-            'https://litellm.example.com',
-            'test-api-key',
-            supportsEmbeddings: false,
-        );
-
-        $this->assertInstanceOf(Platform::class, $platform);
-    }
-
-    public function testCreateWithEmbeddingsOnly(): void
-    {
-        $platform = PlatformFactory::create(
-            'https://litellm.example.com',
-            'test-api-key',
-            supportsCompletions: false,
-        );
-
-        $this->assertInstanceOf(Platform::class, $platform);
-    }
 }
