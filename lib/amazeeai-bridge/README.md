@@ -9,7 +9,7 @@ responses, and a `ModelApiCatalog` that discovers available models from the
 ## Installation
 
 ```bash
-composer require symfony/ai-amazee-ai-platform
+composer require symfony/ai-amazeeai-platform
 ```
 
 ## Configuration
@@ -41,11 +41,9 @@ and use a compiler pass to swap in the bridge's `PlatformFactory`:
 ```yaml
 ai:
     platform:
-        generic:
-            amazeeai:
-                base_url: '%env(AMAZEEAI_LLM_API_URL)%'
-                api_key: '%env(AMAZEEAI_LLM_KEY)%'
-                model_catalog: 'app.amazeeai_model_catalog'
+        amazeeai:
+            base_url: '%env(AMAZEEAI_LLM_API_URL)%'
+            api_key: '%env(AMAZEEAI_LLM_KEY)%'
 ```
 
 ### Resources
