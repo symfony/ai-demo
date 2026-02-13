@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "67aa7f6c21df4f77a84c3e26204560fd",
+    "content-hash": "e92007e8a08b5434e23edcffe9bb0d96",
     "packages": [
         {
             "name": "amazeeio/symfony-amazeeai-configure",
@@ -1974,12 +1974,12 @@
             "time": "2026-01-23T21:29:55+00:00"
         },
         {
-            "name": "symfony/ai-amazee-ai-platform",
-            "version": "dev-main",
+            "name": "symfony/ai-amazeeai-platform",
+            "version": "dev-bridge",
             "dist": {
                 "type": "path",
                 "url": "lib/amazeeai-bridge",
-                "reference": "3a7a4eed48ba471803273dc6a6177a620175713a"
+                "reference": "c65420dfe206445ae7674055ed714aace49273fe"
             },
             "require": {
                 "php": ">=8.2",
@@ -2012,6 +2012,16 @@
             },
             "license": [
                 "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christopher Jossart",
+                    "email": "christophe@colorfield.dev"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
             ],
             "description": "amazee.ai LiteLLM platform bridge for Symfony AI",
             "keywords": [
@@ -10766,7 +10776,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "symfony/ai-amazee-ai-platform": 20
+        "symfony/ai-amazeeai-platform": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

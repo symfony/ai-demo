@@ -1,5 +1,5 @@
 {
-    "name": "symfony/ai-amazee-ai-platform",
+    "name": "symfony/ai-amazeeai-platform",
     "description": "amazee.ai LiteLLM platform bridge for Symfony AI",
     "license": "MIT",
     "type": "symfony-ai-platform",
