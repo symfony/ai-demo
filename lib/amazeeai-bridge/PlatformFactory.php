@@ -21,6 +21,7 @@ use Symfony\AI\Platform\ModelCatalog\ModelCatalogInterface;
 use Symfony\AI\Platform\Platform;
 use Symfony\Component\HttpClient\EventSourceHttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\AI\Platform\Bridge\Generic\Completions\ModelClient;
 
 /**
  * Platform factory for amazee.ai's LiteLLM proxy.
@@ -48,7 +49,7 @@ class PlatformFactory
         $modelClients = [];
         $resultConverters = [];
         if ($supportsCompletions) {
-            $modelClients[] = new \Symfony\AI\Platform\Bridge\Generic\Completions\ModelClient($httpClient, $baseUrl, $apiKey, $completionsPath);
+            $modelClients[] = new ModelClient($httpClient, $baseUrl, $apiKey, $completionsPath);
             $resultConverters[] = new CompletionsResultConverter();
         }
         if ($supportsEmbeddings) {

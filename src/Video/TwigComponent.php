@@ -36,7 +36,7 @@ final class TwigComponent
     public ?string $image = null;
 
     public function __construct(
-        #[Autowire(service: 'ai.platform.generic.amazeeai')]
+        #[Autowire(service: 'ai.platform.amazeeai')]
         private readonly PlatformInterface $platform,
     ) {
     }
