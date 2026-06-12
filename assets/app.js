@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/app.css';
 import './styles/blog.css';
 import './styles/crop.css';
+import './styles/document.css';
 import './styles/recipe.css';
 import './styles/speech.css';
 import './styles/stream.css';

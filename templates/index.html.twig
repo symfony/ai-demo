@@ -12,8 +12,8 @@
             configuration can be found in <code>config/packages/ai.yaml</code>.
         </p>
         <h3 class="text-dark">{{ 'home.examples'|trans }}</h3>
-        <div class="row">
-            <div class="col-md-3">
+        <div class="row row-cols-1 row-cols-md-5 g-3">
+            <div class="col">
                 <div class="card youtube bg-body shadow-sm">
                     <div class="card-img-top py-2">
                         {{ ux_icon('youtube') }}
@@ -32,7 +32,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col">
                 <div class="card recipe bg-body shadow-sm">
                     <div class="card-img-top py-2">
                         {{ ux_icon('recipe') }}
@@ -51,7 +51,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col">
                 <div class="card wikipedia bg-body shadow-sm">
                     <div class="card-img-top py-2">
                         {{ ux_icon('wikipedia') }}
@@ -70,7 +70,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col">
                 <div class="card blog bg-body shadow-sm">
                     <div class="card-img-top py-2">
                         {{ ux_icon('symfony') }}
@@ -89,9 +89,7 @@
                     {% endif %}
                 </div>
             </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-md-3">
+            <div class="col">
                 <div class="card speech bg-body shadow-sm">
                     <div class="card-img-top py-2">
                         {{ ux_icon('microphone') }}
@@ -110,7 +108,9 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-3">
+        </div>
+        <div class="row mt-2 row-cols-1 row-cols-md-5 g-3 justify-content-center">
+            <div class="col">
                 <div class="card video bg-body shadow-sm">
                     <div class="card-img-top py-2">
                         {{ ux_icon('video') }}
@@ -129,7 +129,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col">
                 <div class="card crop bg-body shadow-sm">
                     <div class="card-img-top py-2">
                         {{ ux_icon('crop') }}
@@ -148,7 +148,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col">
                 <div class="card stream bg-body shadow-sm">
                     <div class="card-img-top py-2">
                         {{ ux_icon('turbo') }}
@@ -163,6 +163,25 @@
                         <div class="card-footer">
                             {{ ux_icon('code') }}
                             <a href="{{ path('_profiler_open_file', { file: 'src/Stream/TwigComponent.php', line: 41 }) }}">See Implementation</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col">
+                <div class="card document bg-body shadow-sm">
+                    <div class="card-img-top py-2">
+                        {{ ux_icon('document') }}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Document OCR Bot</h5>
+                        <p class="card-text">Question answering started with a document URL whose text is extracted via Mistral OCR.</p>
+                        <a href="{{ path('document') }}" class="btn btn-outline-dark d-block">Try Document OCR Bot</a>
+                    </div>
+                    {# Profiler route only available in dev #}
+                    {% if 'dev' == app.environment %}
+                        <div class="card-footer">
+                            {{ ux_icon('code') }}
+                            <a href="{{ path('_profiler_open_file', { file: 'src/Document/Chat.php', line: 21 }) }}">See Implementation</a>
                         </div>
                     {% endif %}
                 </div>

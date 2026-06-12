@@ -1,0 +1,61 @@
+.document {
+    body&, .card-img-top {
+        background: #1a73e8;
+        background: linear-gradient(0deg, #0b66c3 0%, #1cc8d6 100%);
+    }
+
+    .card-img-top {
+        color: #ffffff;
+    }
+
+    &.chat {
+        .user-message {
+            background: #0b3d63;
+            color: #ffffff;
+        }
+
+        .bot-message {
+            color: #ffffff;
+            background: #1a73e8;
+
+            &.loading {
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+            a {
+                color: #c5ddfb;
+
+                &:hover {
+                    color: #ffffff;
+                }
+            }
+
+            code {
+                color: #aeeaf3;
+            }
+        }
+
+        .avatar {
+            &.bot {
+                outline: 1px solid #bcd7fb;
+                background: #bcd7fb;
+            }
+
+            &.user {
+                outline: 1px solid #9fc3d6;
+                background: #9fc3d6;
+            }
+        }
+
+        #welcome h4 {
+            color: #1a73e8;
+        }
+
+        button {
+            &:hover {
+                background: #1cc8d6;
+                border-color: #1cc8d6;
+            }
+        }
+    }
+}
