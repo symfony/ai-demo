@@ -7,13 +7,33 @@ body {
 }
 
 .index {
+    .card {
+        height: 100%;
+    }
+
     .card-img-top {
         text-align: center;
 
         svg {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
         }
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-body .btn {
+        margin-top: auto;
+        font-size: 0.875rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 }
 
