@@ -1,0 +1,32 @@
+<div {{ attributes.defaults({ class: 'row' }) }}>
+    <div class="col-4 movie-card-poster">
+        {% include 'components/_movie_poster.html.twig' with { movie, aspect: 'auto' } only %}
+    </div>
+    <div class="col-8 movie-card-scroll-body">
+        <h5 class="card-title mb-1">
+            {{ movie.title }}{% if movie.year %} <small class="text-muted">({{ movie.year }})</small>{% endif %}
+        </h5>
+        {% if movie.director %}
+            <p class="card-text text-muted mb-2"><strong>Director:</strong> {{ movie.director }}</p>
+        {% endif %}
+        {% if movie.imdb %}
+            <p class="card-text mb-3">
+                <a href="{{ movie.imdb }}" target="_blank" rel="noopener">IMDB &rarr;</a>
+            </p>
+        {% endif %}
+        {% if movie.plot|length > 0 %}
+            <h6 class="text-dark-emphasis">Plot</h6>
+            {% for paragraph in movie.plot %}
+                <p class="card-text small">{{ paragraph|markdown_to_html }}</p>
+            {% endfor %}
+        {% endif %}
+        {% if movie.cast|length > 0 %}
+            <h6 class="text-dark-emphasis mt-3">Cast</h6>
+            <ul class="list-unstyled small mb-0">
+                {% for member in movie.cast %}
+                    <li><strong>{{ member.name }}</strong> as {{ member.role }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
