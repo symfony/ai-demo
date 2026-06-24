@@ -16,6 +16,7 @@ ux_icons:
         video: tabler:video-filled
         turbo: mdi:car-turbocharger
         document: mdi:file-document
+        movie: mdi:movie-open
         github: mdi:github
 
         # UI icons

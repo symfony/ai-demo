@@ -10,3 +10,4 @@ import './styles/stream.css';
 import './styles/youtube.css';
 import './styles/video.css';
 import './styles/wikipedia.css';
+import './styles/movies.css';

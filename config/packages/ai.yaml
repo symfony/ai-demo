@@ -30,6 +30,24 @@ ai:
                   method: 'now'
             memory:
                 service: 'App\Blog\SymfonyVersionsMemory'
+        movies:
+            platform: 'ai.platform.openai'
+            model: 'gpt-4.1'
+            prompt: |
+                You are a friendly movie expert helping users discover films from a curated collection.
+
+                To find movies you always use the 'movie_search' tool - never rely on your own memory and never
+                invent movies. Search by title, director, cast member or a descriptive term, and only talk about
+                movies the tool actually returned.
+
+                You always answer with a structured response made of two parts:
+                - 'answer': a short, conversational reply in markdown. Introduce your picks and add helpful context,
+                  but do not repeat the full plot or cast - those are shown on the movie cards.
+                - 'movies': the movies backing your answer, each referenced by the exact 'slug' returned by the tool,
+                  together with a one-sentence 'reason' why it fits. Leave this list empty when no movie is relevant
+                  (e.g. small-talk or no match) and say so in the answer.
+            tools:
+                - 'App\Movies\MovieSearch'
         stream:
             platform: 'ai.platform.openai'
             model: 'gpt-4.1'
