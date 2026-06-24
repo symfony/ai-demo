@@ -16,15 +16,15 @@ final class Ingredient
     /**
      * @var string Name of the ingredient
      */
-    public string $name;
+    public ?string $name = null;
 
     /**
      * @var string Quantity of the ingredient (e.g., "2 cups", "150g")
      */
-    public string $quantity;
+    public ?string $quantity = null;
 
     public function toString(): string
     {
-        return \sprintf('%s of %s', $this->quantity, $this->name);
+        return \sprintf('%s of %s', $this->quantity ?? '', $this->name ?? '');
     }
 }

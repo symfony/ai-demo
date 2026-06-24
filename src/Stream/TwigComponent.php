@@ -16,8 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\EventStreamResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ServerEvent;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
@@ -65,16 +63,14 @@ final class TwigComponent extends AbstractController
 
     public function streamContent(Request $request): EventStreamResponse
     {
+        // The chat is kept in a session-scoped cache, so make sure the session id is
+        // available; the streamed body itself never touches the session, which lets the
+        // framework close (and unlock) it before the response is sent.
+        $request->getSession()->start();
+
         $messages = $this->chat->loadMessages();
 
-        $actualSession = $request->getSession();
-
-        // Overriding session will prevent the framework calling save() on the actual session.
-        // This fixes "Failed to start the session because headers have already been sent" error.
-        $request->setSession(new Session(new MockArraySessionStorage()));
-
-        return new EventStreamResponse(function () use ($request, $actualSession, $messages) {
-            $request->setSession($actualSession);
+        return new EventStreamResponse(function () use ($messages) {
             $response = $this->chat->getAssistantResponse($messages);
 
             foreach ($response as $partialMessage) {

@@ -11,6 +11,7 @@
 
 namespace App\Stream;
 
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\AI\Agent\AgentInterface;
 use Symfony\AI\Platform\Message\AssistantMessage;
 use Symfony\AI\Platform\Message\Message;
@@ -22,10 +23,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class Chat
 {
-    private const SESSION_KEY = 'stream-chat';
+    private const CACHE_PREFIX = 'stream-chat-';
+    private const CACHE_TTL = 3600;
 
     public function __construct(
         private readonly RequestStack $requestStack,
+        private readonly CacheItemPoolInterface $cache,
         #[Autowire(service: 'ai.agent.stream')]
         private readonly AgentInterface $agent,
     ) {
@@ -33,7 +36,9 @@ final class Chat
 
     public function loadMessages(): MessageBag
     {
-        return $this->requestStack->getSession()->get(self::SESSION_KEY, new MessageBag());
+        $item = $this->cache->getItem($this->cacheKey());
+
+        return $item->isHit() ? $item->get() : new MessageBag();
     }
 
     public function submitMessage(string $message): UserMessage
@@ -72,11 +77,19 @@ final class Chat
 
     public function reset(): void
     {
-        $this->requestStack->getSession()->remove(self::SESSION_KEY);
+        $this->cache->deleteItem($this->cacheKey());
     }
 
     private function saveMessages(MessageBag $messages): void
     {
-        $this->requestStack->getSession()->set(self::SESSION_KEY, $messages);
+        $item = $this->cache->getItem($this->cacheKey());
+        $item->set($messages)->expiresAfter(self::CACHE_TTL);
+
+        $this->cache->save($item);
+    }
+
+    private function cacheKey(): string
+    {
+        return self::CACHE_PREFIX.$this->requestStack->getSession()->getId();
     }
 }
