@@ -8,7 +8,7 @@
         <p class="my-4 text-dark">
             {{ 'home.intro'|trans }}<br />
             {{ 'home.intro_suffix'|trans }}<br />
-            Central to this demo are five chatbot examples that are implemented in <code>src/**/Chat.php</code> and AI
+            Central to this demo are six chatbot examples that are implemented in <code>src/**/Chat.php</code> and AI
             configuration can be found in <code>config/packages/ai.yaml</code>.
         </p>
         <h3 class="text-dark">{{ 'home.examples'|trans }}</h3>
@@ -90,6 +90,27 @@
                 </div>
             </div>
             <div class="col">
+                <div class="card movies bg-body shadow-sm">
+                    <div class="card-img-top py-2">
+                        {{ ux_icon('movie') }}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Movie Bot</h5>
+                        <p class="card-text">Search for movies in our collection, with structured output rendered as cards.</p>
+                        <a href="{{ path('movies') }}" class="btn btn-outline-dark d-block">Try Movie Bot</a>
+                    </div>
+                    {# Profiler route only available in dev #}
+                    {% if 'dev' == app.environment %}
+                        <div class="card-footer">
+                            {{ ux_icon('code') }}
+                            <a href="{{ path('_profiler_open_file', { file: 'src/Movies/Chat.php', line: 51 }) }}">See Implementation</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2 row-cols-1 row-cols-md-5 g-3 justify-content-center">
+            <div class="col">
                 <div class="card speech bg-body shadow-sm">
                     <div class="card-img-top py-2">
                         {{ ux_icon('microphone') }}
@@ -108,8 +129,6 @@
                     {% endif %}
                 </div>
             </div>
-        </div>
-        <div class="row mt-2 row-cols-1 row-cols-md-5 g-3 justify-content-center">
             <div class="col">
                 <div class="card video bg-body shadow-sm">
                     <div class="card-img-top py-2">

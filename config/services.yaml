@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    movies_dir: '%kernel.project_dir%/../fixtures/movies'
     app.document.samples:
         - { title: "Emancipation Proclamation, 1863 (handwritten, NARA)", url: "https://catalog.archives.gov/medialive/98/2999/299998/content/arcmedia/master/ARC299998.pdf" }
         - { title: "Civil War widow's pension file — USCT (15-page PDF)", url: "https://omeka-iaamcfh.s3.amazonaws.com/original/466438fd3594c782fcbf172a1fd2cfc66034bbf0.pdf" }
