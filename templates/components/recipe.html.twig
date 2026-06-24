@@ -4,100 +4,30 @@
         <strong class="ms-1 pt-1 d-inline-block">Recipe Bot</strong>
         <button {{ live_action('reset') }} class="btn btn-sm btn-outline-secondary float-end">{{ ux_icon('cancel') }} Reset Chat</button>
     </div>
-    <div id="chat-body" class="card-body p-4 overflow-auto">
-        {% if this.recipe %}
-            {% set recipe = this.recipe %}
-            <div data-loading="hide">
-                <h2 class="mb-4 pb-3 border-bottom">{{ recipe.name }}</h2>
-                <div class="row mb-4">
-                    <div class="col-md-4 text-center">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="info-box p-2 bg-light rounded">
-                                    {{ ux_icon('clock', { height: '24px', width: '24px', class: 'text-primary' }) }}
-                                    <p class="mb-0 mt-2 small">
-                                        <strong>{{ recipe.duration }}</strong><br>
-                                        <span class="text-muted">minutes</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="info-box p-2 bg-light rounded">
-                                    {{ ux_icon('difficulty', { height: '24px', width: '24px', class: 'text-warning' }) }}
-                                    <p class="mb-0 mt-2 small">
-                                        <strong>{{ recipe.level }}</strong><br>
-                                        <span class="text-muted">difficulty</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="info-box p-2 bg-light rounded">
-                                    {{ ux_icon('vegetarian', { height: '24px', width: '24px', class: 'text-success' }) }}
-                                    <p class="mb-0 mt-2 small">
-                                        <strong>{{ recipe.diet }}</strong><br>
-                                        <span class="text-muted">diet</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Ingredients Section -->
-                        <div class="mb-4 text-start mt-4">
-                            <h5 class="mb-3">
-                                {{ ux_icon('ingredients', { class: 'me-2' }) }}
-                                Ingredients
-                            </h5>
-                            <div class="d-flex flex-wrap gap-2">
-                                {% for ingredient in recipe.ingredients %}
-                                    <span class="badge text-start bg-success bg-opacity-50 text-white py-2 px-3">
-                                        <strong>{{ ingredient.name }}</strong><br />
-                                        <small>{{ ingredient.quantity }}</small>
-                                    </span>
-                                {% endfor %}
-                            </div>
-                        </div>
+    <div id="chat-body" class="card-body p-4 overflow-auto position-relative">
+        {% if this.awaitingRecipe %}
+            <div id="recipe-stream-target"></div>
+            <turbo-stream-source src="{{ path('recipe_assistant_reply') }}" id="recipe-stream-source"></turbo-stream-source>
+            <div id="recipe-loader" class="recipe-loader">
+                <div class="d-flex flex-column align-items-center justify-content-center">
+                    <div class="spinner-border text-success mb-4" style="width: 60px; height: 60px;">
+                        <span class="visually-hidden">Loading...</span>
                     </div>
-                    <div class="col-md-8 text-start">
-                        <h5 class="mb-3">
-                            {{ ux_icon('steps', { class: 'me-2' }) }}
-                            Instructions
-                        </h5>
-                        <div class="">
-                            {% for step in recipe.steps %}
-                                <div class="d-flex mb-2 bg-light-subtle p-2 rounded">
-                                    <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="min-width: 32px; width: 32px; height: 32px;">
-                                        <small class="fw-bold">{{ loop.index }}</small>
-                                    </div>
-                                    {{ step }}
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <div class="mt-4 border-top pt-3 d-flex align-items-center justify-content-between">
-                            <div class="fw-semibold text-muted">Share this recipe</div>
-                            <button class="btn btn-outline-secondary" {{ live_action('openShare') }}>
-                                {{ ux_icon('email', { class: 'me-1' }) }}
-                                Share
-                            </button>
-                        </div>
-                    </div>
+                    <h4 class="text-muted mb-2">The bot is cooking your recipe...</h4>
+                    <p class="text-secondary small">This may take a moment</p>
                 </div>
             </div>
+        {% elseif this.recipe %}
+            <div id="recipe-stream-target">
+                {{ include('components/_recipe_card.html.twig', { recipe: this.recipe }) }}
+            </div>
         {% else %}
-            <div data-loading="hide" class="text-center mt-5 py-5 bg-white rounded-5 shadow-sm w-75 mx-auto">
+            <div class="text-center mt-5 py-5 bg-white rounded-5 shadow-sm w-75 mx-auto">
                 {{ ux_icon('recipe', { height: '200px', width: '200px' }) }}
                 <h4 class="mt-5">Cooking Recipes</h4>
                 <span class="text-muted">Please provide your preferences for a recipe.</span>
             </div>
         {% endif %}
-        <div id="loading-message" data-loading>
-            <div class="d-flex flex-column align-items-center justify-content-center w-100">
-                <div class="spinner-border text-success mb-4" style="width: 60px; height: 60px;">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <h4 class="text-muted mb-2">The bot is cooking your recipe...</h4>
-                <p class="text-secondary small">This may take a moment</p>
-            </div>
-        </div>
     </div>
     <div id="recipe-share-overlay" class="share-overlay {{ this.shareOpen ? 'is-open' : '' }}">
         <div class="share-panel">

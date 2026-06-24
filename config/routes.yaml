@@ -31,6 +31,10 @@ recipe:
         template:  'chat.html.twig'
         context: { chat: 'recipe' }
 
+recipe_assistant_reply:
+    path: '/recipe/assistant-reply'
+    controller: 'App\Recipe\TwigComponent::streamContent'
+
 speech:
     path: '/speech'
     controller: 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController'

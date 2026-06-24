@@ -1,0 +1,8 @@
+{% block update %}
+    <twig:Turbo:Stream:Update target="#recipe-stream-target">{{ include('components/_recipe_card.html.twig', { recipe: recipe }) }}</twig:Turbo:Stream:Update>
+    <twig:Turbo:Stream:Remove target="#recipe-loader"/>
+{% endblock %}
+
+{% block end %}
+    <twig:Turbo:Stream:Remove target="#recipe-stream-source"/>
+{% endblock %}

@@ -12,19 +12,23 @@
 namespace App\Recipe;
 
 use App\Recipe\Data\Recipe;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\AI\Agent\AgentInterface;
 use Symfony\AI\Platform\Message\Message;
 use Symfony\AI\Platform\Message\MessageBag;
-use Symfony\AI\Platform\Result\ObjectResult;
+use Symfony\AI\Platform\Message\UserMessage;
+use Symfony\AI\Platform\Result\Stream\Delta\PartialObjectDelta;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class Chat
 {
-    private const SESSION_KEY = 'recipe-chat';
+    private const CACHE_PREFIX = 'recipe-chat-';
+    private const CACHE_TTL = 3600;
 
     public function __construct(
         private readonly RequestStack $requestStack,
+        private readonly CacheItemPoolInterface $cache,
         #[Autowire(service: 'ai.agent.recipe')]
         private readonly AgentInterface $agent,
     ) {
@@ -52,33 +56,81 @@ final class Chat
         $messages = $this->loadMessages();
 
         $messages->add(Message::ofUser($message));
-        $result = $this->agent->call($messages, ['response_format' => Recipe::class]);
 
-        \assert($result instanceof ObjectResult);
+        $this->saveMessages($messages);
+    }
 
-        $recipe = $result->getContent();
+    /**
+     * Whether the latest user message is still awaiting its recipe, i.e. a stream
+     * should be (or is being) consumed for it.
+     */
+    public function isAwaitingRecipe(): bool
+    {
+        $messages = $this->loadMessages()->getMessages();
 
-        \assert($recipe instanceof Recipe);
+        if (0 === \count($messages)) {
+            return false;
+        }
+
+        return $messages[\count($messages) - 1] instanceof UserMessage;
+    }
+
+    /**
+     * Streams the recipe as it is generated, yielding a progressively populated Recipe
+     * for each partial snapshot and persisting the final recipe to the chat store.
+     *
+     * @return \Generator<int, Recipe, void, Recipe>
+     */
+    public function getRecipeStream(MessageBag $messages): \Generator
+    {
+        $stream = $this->agent->call($messages, [
+            'stream' => true,
+            'response_format' => Recipe::class,
+        ])->getContent();
+
+        \assert(is_iterable($stream));
+
+        $recipe = new Recipe();
+        foreach ($stream as $delta) {
+            if ($delta instanceof PartialObjectDelta) {
+                $recipe = $delta->getObject();
+                \assert($recipe instanceof Recipe);
+
+                yield $recipe;
+            }
+        }
 
         $assistantMessage = Message::ofAssistant($recipe->toString());
         $assistantMessage->getMetadata()->add('recipe', $recipe);
         $messages->add($assistantMessage);
 
         $this->saveMessages($messages);
+
+        return $recipe;
     }
 
     public function reset(): void
     {
-        $this->requestStack->getSession()->remove(self::SESSION_KEY);
+        $this->cache->deleteItem($this->cacheKey());
     }
 
-    private function loadMessages(): MessageBag
+    public function loadMessages(): MessageBag
     {
-        return $this->requestStack->getSession()->get(self::SESSION_KEY, new MessageBag());
+        $item = $this->cache->getItem($this->cacheKey());
+
+        return $item->isHit() ? $item->get() : new MessageBag();
     }
 
     private function saveMessages(MessageBag $messages): void
     {
-        $this->requestStack->getSession()->set(self::SESSION_KEY, $messages);
+        $item = $this->cache->getItem($this->cacheKey());
+        $item->set($messages)->expiresAfter(self::CACHE_TTL);
+
+        $this->cache->save($item);
+    }
+
+    private function cacheKey(): string
+    {
+        return self::CACHE_PREFIX.$this->requestStack->getSession()->getId();
     }
 }

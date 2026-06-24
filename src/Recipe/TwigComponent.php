@@ -12,6 +12,10 @@
 namespace App\Recipe;
 
 use App\Recipe\Data\Recipe;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\EventStreamResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ServerEvent;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -20,7 +24,7 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent('recipe')]
-final class TwigComponent
+final class TwigComponent extends AbstractController
 {
     use DefaultActionTrait;
 
@@ -48,6 +52,11 @@ final class TwigComponent
         }
     }
 
+    public function isAwaitingRecipe(): bool
+    {
+        return $this->chat->isAwaitingRecipe();
+    }
+
     #[LiveAction]
     public function submit(): void
     {
@@ -58,6 +67,24 @@ final class TwigComponent
         $this->chat->submitMessage($this->message);
 
         $this->message = null;
+    }
+
+    public function streamContent(Request $request): EventStreamResponse
+    {
+        // The chat is kept in a session-scoped cache, so make sure the session id is
+        // available; the streamed body itself never touches the session, which lets the
+        // framework close (and unlock) it before the response is sent.
+        $request->getSession()->start();
+
+        $messages = $this->chat->loadMessages();
+
+        return new EventStreamResponse(function () use ($messages) {
+            foreach ($this->chat->getRecipeStream($messages) as $recipe) {
+                yield new ServerEvent(explode("\n", $this->renderBlockView('components/_recipe_stream.html.twig', 'update', ['recipe' => $recipe])));
+            }
+
+            yield new ServerEvent(explode("\n", $this->renderBlockView('components/_recipe_stream.html.twig', 'end')));
+        });
     }
 
     #[LiveAction]
