@@ -9,7 +9,7 @@ Reads Monolog files through Mate's CLI. Entries come back as `{datetime, channel
 
 - `monolog-list-files` (opt `environment`): what log files exist, newest first.
 - `monolog-list-channels`: distinct channel names (`app`, `security`, `doctrine`, ...). Reads every file, so it is the slow one; skip it if you already know the channel.
-- `monolog-tail` (`lines`, `level`, `environment`, `channel`): most recent entries. Reads ONLY the single newest file.
+- `monolog-tail` (`limit`, `level`, `environment`, `channel`): most recent entries. Reads ONLY the single newest file.
 - `monolog-search` (`term`, `regex`, `level`, `channel`, `environment`, `from`, `to`, `limit`): searches across all files. Empty `term` with filters set = filter-only.
 - `monolog-context-search` (`key`, `value`, `level`, `environment`, `limit`): matches a structured context field. No channel or date filter here.
 
@@ -18,7 +18,7 @@ These commands accept `--format`: `json` to parse the result, `toon` (when `helg
 ## Workflow
 
 1. Orient: `vendor/bin/mate tools:call monolog-list-files`. Confirm the environment you care about is present and recently modified.
-2. Latest state: `vendor/bin/mate tools:call monolog-tail --level=error --lines=50`. Good for "what just broke", nothing else.
+2. Latest state: `vendor/bin/mate tools:call monolog-tail --level=error --limit=50`. Good for "what just broke", nothing else.
 3. Narrow with search:
    - `vendor/bin/mate tools:call monolog-search --term="Timeout" --level=error`
    - Time-box it: `--from="-1 hour"`, `--from=2026-07-01 --to=2026-07-02`. Any PHP-parseable date works.
