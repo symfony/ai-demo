@@ -25,9 +25,12 @@ return static function (ContainerConfigurator $container): void {
         // and extensions may behave differently. Set to null to disable the check.
         ->set('mate.php_version', '8.5')
 
+        // Loads the demo's own .env and .env.local, so tools like SymfonyAiFeaturesTool see the
+        // real API keys instead of an empty process environment.
+        ->set('mate.env_file', '.env')
+
         // Override default parameters here
         // ->set('mate.cache_dir', sys_get_temp_dir().'/mate')
-        // ->set('mate.env_file', ['.env']) // This will load mate/.env and mate/.env.local
     ;
 
     $container->services()
