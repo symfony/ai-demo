@@ -63,7 +63,7 @@ final class Chat
         $messages->add(Message::ofUser($message));
         $execution = $this->agent->call($messages);
 
-        $messages->add(Message::ofAssistant($execution->asText()));
+        $messages->add(Message::ofAssistant($execution->getResult()));
 
         $this->saveMessages($messages);
     }
