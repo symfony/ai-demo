@@ -1,18 +1,15 @@
-{% import "_message.html.twig" as message %}
+{% import '_message.html.twig' as message %}
+{% set messages = this.messages %}
 
-<div class="card mx-auto shadow-lg" {{ attributes.defaults(stimulus_controller('movies')) }}>
-    <div class="card-header p-2">
-        {{ ux_icon('movie') }}
-        <strong class="ms-1 pt-1 d-inline-block">Movie Bot</strong>
-        <button {{ live_action('reset') }} class="btn btn-sm btn-outline-secondary float-end">{{ ux_icon('cancel') }} Reset Chat</button>
-    </div>
-    <div id="chat-body" class="card-body p-4 overflow-auto">
-        {% for msg in this.messages %}
+<section class="chat" {{ attributes.defaults(stimulus_controller('movies')) }}>
+    {{ include('_chat_header.html.twig', { demo: demos.movies }) }}
+    <div id="chat-body" class="chat-body">
+        {% for msg in messages %}
             {% include '_message.html.twig' with { message: msg, latest: loop.last } %}
             {% if msg.role.value == 'assistant' %}
                 {% set suggestions = this.getMoviesFor(msg) %}
                 {% if suggestions is not empty %}
-                    <div class="movie-suggestions d-flex flex-wrap gap-3 mb-4">
+                    <div class="movie-suggestions d-flex flex-wrap gap-3">
                         {% for suggestion in suggestions %}
                             <figure class="movie-suggestion mb-0 text-center">
                                 <button type="button"
@@ -31,11 +28,7 @@
                 {% endif %}
             {% endif %}
         {% else %}
-            <div id="welcome" class="text-center mt-5 py-5 bg-white rounded-5 shadow-sm w-75 mx-auto">
-                {{ ux_icon('movie', { height: '200px', width: '200px' }) }}
-                <h4 class="mt-5">Chat about movies</h4>
-                <span class="text-muted">Search for movies in our collection by title, director, cast or vibe &mdash; matching movies appear as cards.</span>
-            </div>
+            {{ message.welcome('Chat about movies', 'Search for movies in our collection by title, director, cast or vibe - matching movies appear as cards.') }}
         {% endfor %}
         <div id="loading-message" class="d-none">
             {{ message.user([{text:''}]) }}
@@ -52,14 +45,14 @@
             </div>
         </div>
     {% endif %}
-    <div class="card-footer p-2">
-        <form class="input-group" {{ live_action('submit:prevent') }}>
-            <input autofocus id="chat-message"
-                   data-model="norender|message"
-                   type="text" class="form-control border-0" placeholder="Write a message ...">
-            <button class="btn btn-outline-secondary border-0">
-                {{ ux_icon('send') }} Submit
-            </button>
+    <div class="chat-composer" data-controller="chat-prompt">
+        {% if messages is empty %}
+            {{ include('_chat_prompts.html.twig', { prompts: ['Movies by Christopher Nolan', 'Something with Tom Hanks', 'Something for a cozy evening'] }) }}
+        {% endif %}
+        <form class="chat-form" {{ live_action('submit:prevent') }}>
+            <input autofocus id="chat-message" data-model="norender|message" type="text" class="chat-input" placeholder="What kind of movie are you looking for?" autocomplete="off">
+            <span class="chat-hint">↵ send</span>
+            <button class="chat-send" aria-label="Send">{{ ux_icon('send') }}</button>
         </form>
     </div>
-</div>
+</section>

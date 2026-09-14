@@ -112,7 +112,7 @@ abstract class E2ETestCase extends PantherTestCase
     protected function chat(string $message, string $input = '#chat-message'): void
     {
         $this->type($input, $message);
-        $this->click('.card-footer form button');
+        $this->click('.chat-form button');
     }
 
     /**

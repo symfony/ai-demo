@@ -1,31 +1,28 @@
-{% import "_message.html.twig" as message %}
+{% import '_message.html.twig' as message %}
+{% set messages = this.messages %}
 
-<div class="card mx-auto shadow-lg" {{ attributes }}>
-    <div class="card-header p-2">
-        {{ ux_icon('turbo') }}
-        <strong class="ms-1 pt-1 d-inline-block">Turbo Stream Bot</strong>
-        <button {{ live_action('reset') }} class="btn btn-sm btn-outline-secondary float-end">{{ ux_icon('cancel') }} Reset Chat</button>
-    </div>
-    <div id="chat-body" class="card-body p-4 overflow-auto">
-        {% for message in this.messages %}
+<section class="chat" {{ attributes }}>
+    {{ include('_chat_header.html.twig', { demo: demos.stream }) }}
+    <div id="chat-body" class="chat-body">
+        {% for message in messages %}
             {% include '_message.html.twig' with { message, latest: loop.last } %}
         {% endfor %}
         {% if this.stream %}
             {{ message.bot('Thinking...', contentId = 'bot-message-streamed') }}
             <turbo-stream-source src="{{ path('stream_assistant_reply') }}" id="bot-message-stream"></turbo-stream-source>
         {% endif %}
-        {% if not this.messages|length %}
-            <div id="welcome" class="text-center mt-5 py-5 bg-white rounded-5 shadow-sm w-75 mx-auto">
-                {{ ux_icon('turbo', { height: '200px', width: '200px' }) }}
-                <h4 class="mt-5">Turbo Stream Chat</h4>
-                <span class="text-muted">Please ask the bot about the used technologies in this example.</span>
-            </div>
+        {% if messages is empty %}
+            {{ message.welcome('Turbo Stream Chat', 'My answers stream in token by token via Turbo Streams and server-sent events - ask me about the technologies used in this example.') }}
         {% endif %}
     </div>
-    <div class="card-footer p-2">
-        <form class="input-group" {{ live_action('submit:prevent') }}>
-            <input autofocus data-model="norender|message" type="text" class="form-control border-0" placeholder="Write a message ...">
-            <button class="btn btn-outline-secondary border-0">{{ ux_icon('send') }} Submit</button>
+    <div class="chat-composer" data-controller="chat-prompt">
+        {% if messages is empty %}
+            {{ include('_chat_prompts.html.twig', { prompts: ['Which technologies does this chat use?', 'Explain server-sent events', 'Write a haiku about PHP'] }) }}
+        {% endif %}
+        <form class="chat-form" {{ live_action('submit:prevent') }}>
+            <input autofocus id="chat-message" data-model="norender|message" type="text" class="chat-input" placeholder="Write a message ..." autocomplete="off">
+            <span class="chat-hint">↵ send</span>
+            <button class="chat-send" aria-label="Send">{{ ux_icon('send') }}</button>
         </form>
     </div>
-</div>
+</section>

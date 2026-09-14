@@ -1,29 +1,17 @@
 .crop {
-    body&, .card-img-top {
-        background: rgb(34,34,34);
-        background: linear-gradient(0deg, rgb(209, 14, 205) 0%, rgb(120, 21, 135) 100%);
+    .chat-body > .crop-panel {
+        max-width: 960px;
     }
 
-    .card-img-top {
-        color: #ffffff;
+    .crop-panel h5 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        color: var(--text-strong);
     }
 
-    .card-header {
-        background: #efefef;
-
-        & > svg {
-            margin-top: -2px;
-            width: 32px;
-            height: 32px;
-        }
-    }
-
-    & footer {
-        color: #ffffff;
-
-        a {
-            color: #ffffff;
-        }
+    .crop-loading h4 {
+        font-family: var(--font-display);
+        font-weight: 700;
     }
 
     .inline-radios fieldset {

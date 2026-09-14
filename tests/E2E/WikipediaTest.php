@@ -28,7 +28,7 @@ final class WikipediaTest extends E2ETestCase
         $this->assertStringContainsString('Symfony', $this->waitForBotMessage());
 
         // The agent is configured with include_sources, so its sources are listed as badges.
-        $this->assertSelectorExists('#chat-body .badge.text-bg-secondary');
+        $this->assertSelectorExists('#chat-body .message-sources .source-pill');
         $this->assertSelectorExists('#chat-body a[href*="wikipedia.org"]');
 
         $panel = $this->openAiPanel(platformCalls: 2);

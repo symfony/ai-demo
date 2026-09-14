@@ -5,7 +5,6 @@
         <title>{% block title %}Symfony AI Demo{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/ico" href="{{ asset('favicon.ico') }}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         {% block stylesheets %}
         {% endblock %}
 
@@ -14,55 +13,24 @@
         {% endblock %}
     </head>
     <body class="{{ block('body_class') }}">
-        <nav class="navbar bg-white shadow-lg navbar-expand">
-            <div class="container">
-                <a class="navbar-brand ms-2 p-0" href="{{ path('index') }}">
-                    {{ ux_icon('bot', { height: '40px', width: '40px' }) }}
-                    <strong>Symfony AI</strong> Demo
-                </a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav ms-auto me-2 mb-0 small">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('youtube') }}">{{ ux_icon('youtube') }} YouTube</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('recipe') }}">{{ ux_icon('recipe') }} Recipe</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('movies') }}">{{ ux_icon('movie') }} Movies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('wikipedia') }}">{{ ux_icon('wikipedia') }} Wikipedia</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('blog') }}">{{ ux_icon('symfony') }} Symfony Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('document') }}">{{ ux_icon('document') }} Document OCR</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('crop') }}">{{ ux_icon('crop') }} Smart Crop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('speech') }}">{{ ux_icon('microphone') }} Speech</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('video') }}">{{ ux_icon('video') }} Video</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('stream') }}">{{ ux_icon('turbo') }} Turbo Stream</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="container pt-5">
+        <header class="app-header">
+            <a class="app-brand" href="{{ path('index') }}">
+                {{ include('_logo.svg') }}
+                <span class="app-brand-label">Demo</span>
+            </a>
+            <nav class="app-nav" aria-label="Examples">
+                {% for route, demo in demos %}
+                    {% if route == app.current_route %}
+                        <a class="app-nav-link is-active" href="{{ path(route) }}" aria-current="page" style="--demo-gradient: {{ demo.gradient }}">{{ ux_icon(demo.icon) }}{{ demo.label }}</a>
+                    {% else %}
+                        <a class="app-nav-link" href="{{ path(route) }}">{{ ux_icon(demo.icon) }}{{ demo.label }}</a>
+                    {% endif %}
+                {% endfor %}
+            </nav>
+            <a class="app-github" href="https://github.com/symfony/ai-demo" target="_blank" rel="noopener" aria-label="Symfony AI Demo on GitHub">{{ ux_icon('github') }}</a>
+        </header>
+        <main class="app-main">
             {% block content %}{% endblock %}
-            <footer class="py-4 text-center">
-                Demo application for <a href="https://github.com/symfony/ai" target="_blank">Symfony AI</a>
-                &bullet;
-                Feel free to propose more examples on <a href="https://github.com/symfony/ai" target="_blank">GitHub</a>
-            </footer>
-        </div>
+        </main>
     </body>
 </html>

@@ -7,21 +7,55 @@ import { getComponent } from '@symfony/ux-live-component';
 export default class extends Controller {
     async initialize() {
         this.component = await getComponent(this.element);
+    };
 
+    async connect() {
         this.video = document.getElementById('videoFeed');
         this.canvas = document.getElementById('canvas');
 
         await this.initCamera();
-    };
+    }
+
+    disconnect() {
+        this.stopCamera();
+    }
 
     async initCamera() {
+        const request = this.cameraRequest = {};
+
         try {
-            this.stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+
+            // The controller got disconnected while the browser asked for permission, e.g. by navigating away.
+            if (request !== this.cameraRequest) {
+                stream.getTracks().forEach((track) => track.stop());
+
+                return;
+            }
+
+            this.stream = stream;
             this.video.srcObject = this.stream;
             console.log('Camera access granted. Ready to start.');
         } catch (err) {
+            if (request !== this.cameraRequest) {
+                return;
+            }
+
             console.error('Error accessing camera:', err);
             alert(`Error accessing camera: ${err.name}. Make sure you've granted permission and are on HTTPS or localhost.`);
+        }
+    }
+
+    stopCamera() {
+        this.cameraRequest = null;
+
+        if (this.stream) {
+            this.stream.getTracks().forEach((track) => track.stop());
+            this.stream = null;
+        }
+
+        if (this.video) {
+            this.video.srcObject = null;
         }
     }
 

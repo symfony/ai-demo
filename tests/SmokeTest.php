@@ -28,7 +28,7 @@ final class SmokeTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', 'Welcome to the Symfony AI Demo');
-        $this->assertSelectorCount(10, '.card');
+        $this->assertSelectorCount(10, '.demo-card');
     }
 
     #[DataProvider('provideChats')]
@@ -39,7 +39,7 @@ final class SmokeTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextSame('h4', $expectedHeadline);
-        $this->assertSelectorCount(1, '.card-footer button');
+        $this->assertSelectorCount(1, '.chat-form button');
     }
 
     /**
@@ -60,7 +60,7 @@ final class SmokeTest extends WebTestCase
         $client->request('GET', '/crop');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('.card-header strong', 'Smart Image Cropping');
+        $this->assertSelectorTextContains('.chat-name', 'Smart Image Cropping');
         $this->assertSelectorCount(3, 'input[name="ratio"]');
         $this->assertSelectorCount(4, 'input[name="width"]');
         $this->assertSelectorCount(5, 'button[data-live-action-param="selectPreset"]');

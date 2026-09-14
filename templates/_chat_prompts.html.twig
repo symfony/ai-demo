@@ -1,0 +1,5 @@
+<div class="chat-prompts">
+    {% for prompt in prompts %}
+        <button type="button" class="chat-prompt" data-action="chat-prompt#send" data-chat-prompt-text-param="{{ prompt }}">{{ prompt }}</button>
+    {% endfor %}
+</div>

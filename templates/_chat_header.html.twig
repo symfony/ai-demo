@@ -1,0 +1,20 @@
+<div class="chat-header">
+    <a class="chat-back" href="{{ path('index') }}" aria-label="All examples" title="All examples">{{ ux_icon('arrow-left') }}</a>
+    <span class="chat-icon">{{ ux_icon(demo.icon) }}</span>
+    <div class="chat-title">
+        <div class="chat-title-row">
+            <strong class="chat-name">{{ demo.name }}</strong>
+            <span class="chat-tag">{{ demo.tag }}</span>
+        </div>
+        <div class="chat-meta">{{ demo.description }} &middot; <code>{{ demo.model }}</code></div>
+    </div>
+    <div class="chat-actions">
+        {# Profiler route only available in dev #}
+        {% if 'dev' == app.environment %}
+            <a class="button button-outline" href="{{ path('_profiler_open_file', { file: demo.source, line: demo.line }) }}">{{ ux_icon('code') }} Source</a>
+        {% endif %}
+        {% if reset ?? true %}
+            <button type="button" class="button button-ghost" {{ live_action('reset') }}>{{ reset_label ?? 'Reset chat' }}</button>
+        {% endif %}
+    </div>
+</div>

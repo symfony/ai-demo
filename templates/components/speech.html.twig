@@ -1,49 +1,39 @@
-{% import "_message.html.twig" as msg %}
+{% import '_message.html.twig' as msg %}
 
-<div class="card mx-auto shadow-lg" {{ attributes.defaults(stimulus_controller('speech')) }}>
-    <div class="card-header p-2">
-        {{ ux_icon('microphone') }}
-        <strong class="ms-1 pt-1 d-inline-block">Speech Bot</strong>
-        <button {{ live_action('reset') }} class="btn btn-sm btn-outline-secondary float-end">{{ ux_icon('cancel') }} Reset Chat</button>
-    </div>
-    <div id="chat-body" class="card-body p-4 overflow-auto">
+<section class="chat" {{ attributes.defaults(stimulus_controller('speech')) }}>
+    {{ include('_chat_header.html.twig', { demo: demos.speech }) }}
+    <div id="chat-body" class="chat-body">
         {% for message in this.messages %}
             {% if 'user' == message.role.value %}
                 {% include '_message.html.twig' with { message, latest: loop.last } %}
             {% else %}
-                <div class="d-flex align-items-baseline mb-4">
-                    <div class="bot avatar rounded-3 shadow-sm">
-                        {{ ux_icon('bot', { height: '45px', width: '45px' }) }}
-                    </div>
-                    <div class="ps-2">
-                        <audio class="pt-3" controls {{ loop.last ? 'autoplay' }} src="{{ message.metadata.get('speech') }}"></audio>
-                    </div>
+                <div class="message message-bot">
+                    <span class="bot avatar">{{ ux_icon('bot') }}</span>
+                    <audio class="message-audio" controls {{ loop.last ? 'autoplay' }} src="{{ message.metadata.get('speech') }}"></audio>
                 </div>
             {% endif %}
         {% else %}
-            <div id="welcome" class="text-center mt-5 py-5 bg-white rounded-5 shadow-sm w-75 mx-auto">
-                {{ ux_icon('microphone', { height: '200px', width: '200px' }) }}
-                <h4 class="mt-5">Speech Bot</h4>
-                <span class="text-muted">Please hit the button below to start talking and again to stop</span>
-            </div>
+            {{ msg.welcome('Speech Bot', 'Hit the button below to start talking, and again to stop. I transcribe what you say, ask my subagent about Symfony news if needed, and read the answer back to you.') }}
         {% endfor %}
         <div id="loading-message" class="d-none">
             {{ msg.user([{text:'Converting your speech to text ...'}], true) }}
             {{ msg.bot('The Bot is looking for an answer ...', true) }}
         </div>
     </div>
-    <div class="card-footer p-2 text-center">
-        <button id="micro-start" class="btn btn-primary" type="button">
-            {{ ux_icon('microphone') }}
-            <strong>Say something</strong>
-        </button>
-        <button id="micro-stop" class="btn btn-danger d-none" type="button">
-            {{ ux_icon('microphone-mute') }}
-            <strong>Stop</strong>
-        </button>
-        <button id="bot-thinking" class="btn btn-secondary disabled d-none" type="button">
-            {{ ux_icon('timer') }}
-            <strong>Bot is thinking</strong>
-        </button>
+    <div class="chat-composer">
+        <div class="chat-controls">
+            <button id="micro-start" class="button button-primary button-lg" type="button">
+                {{ ux_icon('microphone') }}
+                Say something
+            </button>
+            <button id="micro-stop" class="button button-danger button-lg d-none" type="button">
+                {{ ux_icon('microphone-mute') }}
+                Stop
+            </button>
+            <button id="bot-thinking" class="button button-muted button-lg d-none" type="button" disabled>
+                {{ ux_icon('timer') }}
+                Bot is thinking
+            </button>
+        </div>
     </div>
-</div>
+</section>

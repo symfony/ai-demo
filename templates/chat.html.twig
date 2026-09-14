@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block body_class 'chat ' ~ chat %}
+{% block body_class 'chat-page ' ~ chat %}
 
 {% block content %}
-    <div>
+    <div class="chat-page-content" style="--demo-gradient: {{ demos[chat].gradient }}">
         {{ component(chat) }}
     </div>
 {% endblock %}

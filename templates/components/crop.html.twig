@@ -1,101 +1,97 @@
-<div id="crop-component" class="card mx-auto shadow-lg" {{ attributes }}>
-    <div class="card-header p-2">
-        {{ ux_icon('crop') }}
-        <strong class="ms-1 pt-1 d-inline-block">Smart Image Cropping</strong>
-        <button {{ live_action('reset') }} class="btn btn-sm btn-outline-secondary float-end">
-            {{ ux_icon('cancel') }} Reset
-        </button>
-    </div>
-    <div id="chat-body" class="card-body p-4">
-        {% set selectedPreset = this.selectedPreset %}
-        {% set originalSrc = selectedPreset ? asset('images/samples/' ~ selectedPreset.file) : imageData %}
+<section id="crop-component" class="chat" {{ attributes }}>
+    {{ include('_chat_header.html.twig', { demo: demos.crop, reset_label: 'Reset' }) }}
+    <div id="chat-body" class="chat-body chat-body-panel">
+        <div class="crop-panel">
+            {% set selectedPreset = this.selectedPreset %}
+            {% set originalSrc = selectedPreset ? asset('images/samples/' ~ selectedPreset.file) : imageData %}
 
-        {% if not croppedImage %}
-            <div data-loading="action(crop)|hide">
-                {% set form = this.form %}
-                {{ form_start(form, {
-                    attr: {
-                        'data-action': 'live#action:prevent',
-                        'data-live-action-param': 'crop',
-                        'data-model': 'norender|*'
-                    }
-                }) }}
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            {{ form_row(form.originalImage, {row_attr: {'data-live-ignore': true}}) }}
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Demo image</label>
-                            <div class="d-flex gap-1">
-                                {% for preset in this.presets %}
-                                    <button type="button"
-                                            class="btn p-0 border border-3 {{ presetId == preset.id ? 'border-primary' : 'border-transparent' }} flex-fill"
-                                            style="min-width: 0;"
-                                            title="{{ preset.label }} - {{ preset.scenario }}"
-                                            {{ live_action('selectPreset', {id: preset.id}) }}>
-                                        <img src="{{ asset('images/samples/' ~ preset.file) }}"
-                                             alt="{{ preset.label }}"
-                                             style="display: block; width: 100%; height: 56px; object-fit: cover;" />
-                                    </button>
-                                {% endfor %}
+            {% if not croppedImage %}
+                <div data-loading="action(crop)|hide">
+                    {% set form = this.form %}
+                    {{ form_start(form, {
+                        attr: {
+                            'data-action': 'live#action:prevent',
+                            'data-live-action-param': 'crop',
+                            'data-model': 'norender|*'
+                        }
+                    }) }}
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                {{ form_row(form.originalImage, {row_attr: {'data-live-ignore': true}}) }}
                             </div>
-                            {% if selectedPreset %}
-                                <div class="small text-muted mt-1">
-                                    Image by {{ selectedPreset.author }} -
-                                    <a href="{{ selectedPreset.licenseUrl }}" target="_blank" rel="noopener">{{ selectedPreset.license }}</a> -
-                                    <a href="{{ selectedPreset.sourceUrl }}" target="_blank" rel="noopener">source on Wikimedia Commons</a>
+                            <div class="col-md-6">
+                                <label class="form-label">Demo image</label>
+                                <div class="d-flex gap-1">
+                                    {% for preset in this.presets %}
+                                        <button type="button"
+                                                class="btn p-0 border border-3 {{ presetId == preset.id ? 'border-primary' : 'border-transparent' }} flex-fill"
+                                                style="min-width: 0;"
+                                                title="{{ preset.label }} - {{ preset.scenario }}"
+                                                {{ live_action('selectPreset', {id: preset.id}) }}>
+                                            <img src="{{ asset('images/samples/' ~ preset.file) }}"
+                                                 alt="{{ preset.label }}"
+                                                 style="display: block; width: 100%; height: 56px; object-fit: cover;" />
+                                        </button>
+                                    {% endfor %}
                                 </div>
-                            {% endif %}
+                                {% if selectedPreset %}
+                                    <div class="small text-muted mt-1">
+                                        Image by {{ selectedPreset.author }} -
+                                        <a href="{{ selectedPreset.licenseUrl }}" target="_blank" rel="noopener">{{ selectedPreset.license }}</a> -
+                                        <a href="{{ selectedPreset.sourceUrl }}" target="_blank" rel="noopener">source on Wikimedia Commons</a>
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6 inline-radios">
-                            {{ form_row(form.ratio) }}
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6 inline-radios">
+                                {{ form_row(form.ratio) }}
+                            </div>
+                            <div class="col-md-6 inline-radios">
+                                {{ form_row(form.width) }}
+                            </div>
                         </div>
-                        <div class="col-md-6 inline-radios">
-                            {{ form_row(form.width) }}
+                        <div class="text-center">
+                            <button class="btn btn-primary btn-lg" {{ this.hasImage ? '' : 'disabled' }}>
+                                {{ ux_icon('crop') }}
+                                Crop My Image!
+                            </button>
                         </div>
-                    </div>
-                    <div class="text-center">
-                        <button class="btn btn-primary" {{ this.hasImage ? '' : 'disabled' }}>
-                            {{ ux_icon('crop') }}
-                            Crop My Image!
-                        </button>
-                    </div>
-                {{ form_end(form) }}
-            </div>
-        {% else %}
-            <div data-loading="action(crop)|hide">
-                <div class="row text-start">
-                    <div class="col-md-6">
-                        <h5>Original Image</h5>
-                        <div class="bg-body-secondary rounded text-center p-3">
-                            <img src="{{ originalSrc }}" alt="Original Image" class="img-fluid mt-2" />
-                            {% if selectedPreset %}
-                                <div class="small text-muted mt-2">
-                                    Image by {{ selectedPreset.author }} -
-                                    <a href="{{ selectedPreset.licenseUrl }}" target="_blank" rel="noopener">{{ selectedPreset.license }}</a> -
-                                    <a href="{{ selectedPreset.sourceUrl }}" target="_blank" rel="noopener">source on Wikimedia Commons</a>
-                                </div>
-                            {% endif %}
+                    {{ form_end(form) }}
+                </div>
+            {% else %}
+                <div data-loading="action(crop)|hide">
+                    <div class="row text-start">
+                        <div class="col-md-6">
+                            <h5>Original Image</h5>
+                            <div class="bg-body-secondary rounded-4 text-center p-3">
+                                <img src="{{ originalSrc }}" alt="Original Image" class="img-fluid mt-2" />
+                                {% if selectedPreset %}
+                                    <div class="small text-muted mt-2">
+                                        Image by {{ selectedPreset.author }} -
+                                        <a href="{{ selectedPreset.licenseUrl }}" target="_blank" rel="noopener">{{ selectedPreset.license }}</a> -
+                                        <a href="{{ selectedPreset.sourceUrl }}" target="_blank" rel="noopener">source on Wikimedia Commons</a>
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <h5>Cropped Image</h5>
-                        <div class="bg-body-secondary rounded text-center p-3">
-                            <img src="{{ croppedImage }}" alt="Cropped Image" class="img-fluid mt-2" />
+                        <div class="col-md-6">
+                            <h5>Cropped Image</h5>
+                            <div class="bg-body-secondary rounded-4 text-center p-3">
+                                <img src="{{ croppedImage }}" alt="Cropped Image" class="img-fluid mt-2" />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endif %}
+            {% endif %}
 
-        <div data-loading="action(crop)|show" class="text-center py-5">
-            <div class="spinner-border text-primary mb-4" role="status" style="width: 5rem; height: 5rem;">
-                <span class="visually-hidden">Cropping...</span>
+            <div data-loading="action(crop)|show" class="crop-loading text-center py-5">
+                <div class="spinner-border text-primary mb-4" role="status" style="width: 5rem; height: 5rem;">
+                    <span class="visually-hidden">Cropping...</span>
+                </div>
+                <h4 class="text-muted mb-2">Analyzing your image…</h4>
+                <p class="text-secondary small m-0">Finding the most relevant area to crop</p>
             </div>
-            <h4 class="text-muted mb-2">Analyzing your image…</h4>
-            <p class="text-secondary small m-0">Finding the most relevant area to crop</p>
         </div>
     </div>
-</div>
+</section>

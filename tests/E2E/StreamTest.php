@@ -19,7 +19,7 @@ final class StreamTest extends E2ETestCase
     /**
      * The input of this chat has no id, unlike the other ones.
      */
-    private const string INPUT = '.card-footer input';
+    private const string INPUT = '.chat-form input';
 
     public function testAnswerIsStreamedIntoTheChat()
     {

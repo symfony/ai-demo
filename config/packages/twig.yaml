@@ -1,6 +1,109 @@
 twig:
     file_name_pattern: '*.twig'
     form_themes: [ 'bootstrap_5_layout.html.twig' ]
+    globals:
+        # All examples of the demo, keyed by their route - in the order of the navigation and the start page
+        demos:
+            youtube:
+                label: 'YouTube'
+                name: 'YouTube Transcript Bot'
+                tag: 'Context Injection'
+                description: 'Question answering started with a YouTube video ID which gets converted into a transcript.'
+                model: 'gpt-5-mini'
+                icon: 'youtube'
+                gradient: 'linear-gradient(180deg, #C05920, #CF781A)'
+                source: 'src/YouTube/Chat.php'
+                line: 21
+            recipe:
+                label: 'Recipe'
+                name: 'Recipe Bot'
+                tag: 'Structured Output'
+                description: 'Chatbot for proposing cooking recipes - powered by structured output.'
+                model: 'gpt-5-mini'
+                icon: 'recipe'
+                gradient: 'linear-gradient(180deg, #83A659, #71BCB8)'
+                source: 'src/Recipe/Chat.php'
+                line: 22
+            movies:
+                label: 'Movies'
+                name: 'Movie Bot'
+                tag: 'Structured Output'
+                description: 'Search for movies in our collection, with structured output rendered as cards.'
+                model: 'gpt-4.1'
+                icon: 'movie'
+                gradient: 'linear-gradient(180deg, #1D4ED8, #7F5BFF)'
+                source: 'src/Movies/Chat.php'
+                line: 51
+            wikipedia:
+                label: 'Wikipedia'
+                name: 'Wikipedia Research Bot'
+                tag: 'Tool Calling'
+                description: 'A chatbot equipped with tools to search and read Wikipedia about topics you ask for.'
+                model: 'gpt-5-mini'
+                icon: 'wikipedia'
+                gradient: 'linear-gradient(180deg, #1CA574, #56AB48)'
+                source: 'src/Wikipedia/Chat.php'
+                line: 21
+            blog:
+                label: 'Symfony Blog'
+                name: 'Symfony Blog Bot'
+                tag: 'RAG'
+                description: "Retrieval Augmented Generation based on Symfony's blog dumped to a vector store."
+                model: 'gpt-4.1 · text-embedding-ada-002'
+                icon: 'symfony'
+                gradient: 'linear-gradient(180deg, #433F77, #C43BC2)'
+                source: 'src/Blog/Chat.php'
+                line: 21
+            document:
+                label: 'Document OCR'
+                name: 'Document OCR Bot'
+                tag: 'Multi-Modal'
+                description: 'Question answering started with a document URL whose text is extracted via Mistral OCR.'
+                model: 'mistral-ocr-latest · mistral-medium-latest'
+                icon: 'document'
+                gradient: 'linear-gradient(180deg, #4C1D95, #5A55A5)'
+                source: 'src/Document/Chat.php'
+                line: 21
+            crop:
+                label: 'Smart Crop'
+                name: 'Smart Image Cropping'
+                tag: 'Object Detection'
+                description: 'AI-assisted image cropping to focus on key elements while resizing.'
+                model: 'facebook/detr-resnet-50'
+                icon: 'crop'
+                gradient: 'linear-gradient(180deg, #85A72B, #97BC43)'
+                source: 'src/Crop/Image/Analyzer.php'
+                line: 21
+            speech:
+                label: 'Speech'
+                name: 'Speech Bot + Subagent'
+                tag: 'Subagents'
+                description: 'Speech-to-text & text-to-speech and a subagent, combining 4 models in total.'
+                model: 'whisper-1 · gpt-5-mini · tts-1'
+                icon: 'microphone'
+                gradient: 'linear-gradient(180deg, #42DEEE, #7069B0)'
+                source: 'src/Speech/Chat.php'
+                line: 25
+            video:
+                label: 'Video'
+                name: 'Video Bot'
+                tag: 'Multi-Modal'
+                description: 'Vision capabilities of GPT in combination with your webcam.'
+                model: 'gpt-5.2'
+                icon: 'video'
+                gradient: 'linear-gradient(180deg, #3B9D87, #35A781)'
+                source: 'src/Video/TwigComponent.php'
+                line: 41
+            stream:
+                label: 'Turbo Stream'
+                name: 'Turbo Stream Bot'
+                tag: 'Streaming'
+                description: 'Streaming text responses with markdown based on Turbo and SSE.'
+                model: 'gpt-4.1'
+                icon: 'turbo'
+                gradient: 'linear-gradient(180deg, #E94E77, #D68189)'
+                source: 'src/Stream/TwigComponent.php'
+                line: 41
 
 when@test:
     twig:
